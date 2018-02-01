@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-crypto-price',
@@ -10,6 +11,7 @@ export class CryptoPriceComponent implements OnInit {
 
   objectKeys = Object.keys;
   cryptos: any;
+  private alive: boolean;
 
   constructor(private _data: DataService) {}
 
