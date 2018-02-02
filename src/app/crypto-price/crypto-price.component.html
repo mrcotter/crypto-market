@@ -1,6 +1,6 @@
 <div *ngIf="cryptos">
   <div id="crypto-container" *ngFor="let crypto of cryptos">
     <span class="left">{{ crypto.cryptoKey }}</span>
-    <span class="right">{{ crypto.cryptoPrice }}</span>
+    <span class="right">{{ crypto.cryptoMarketCap}} {{ crypto.cryptoPrice }} {{ crypto.crypto24Change}}</span>
   </div>
 </div> 
