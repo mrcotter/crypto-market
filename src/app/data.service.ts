@@ -6,13 +6,16 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class DataService {
 
-  result: any;
+  private result: any;
+  private coinlist: string = "BTC,ETH,XRP,BCH,ADA,XLM,NEO,LTC,EOS,XEM";
+  private url: string = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + this.coinlist + "&tsyms=USD";
 
   constructor(private _http: HttpClient) {}
 
-  getPrices(): Observable<any> {
+  // Fetch data every 10 seconds
+  getPricesFull(): Observable<any> {
     return Observable.interval(10000).startWith(0)
-      .mergeMapTo(this._http.get("https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,IOT&tsyms=USD"))
+      .mergeMapTo(this._http.get(this.url))
       .map(result => this.result = result);
   }
 

@@ -10,16 +10,25 @@ import { Observable } from 'rxjs/Observable';
 export class CryptoPriceComponent implements OnInit {
 
   objectKeys = Object.keys;
-  cryptos: any;
-  private alive: boolean;
+  receiveData: any;
+  cryptos: any[] = [];
 
   constructor(private _data: DataService) {}
 
   ngOnInit() {
-    this._data.getPrices()
+    this._data.getPricesFull()
       .subscribe(res => {
-        this.cryptos = res;
-        //console.log(res);
+        this.receiveData = res.DISPLAY;
+        let coinKeys = Object.keys(this.receiveData);
+        let coinValues = Object.values(this.receiveData);
+
+        for (let _i = 0; _i < coinKeys.length; _i++) { 
+          this.cryptos[_i] = {
+            cryptoKey: coinKeys[_i],
+            cryptoPrice: coinValues[_i].USD.PRICE
+          };
+        }
+        //console.log(typeof(Object.keys(this.cryptos)));
       });
   }
 
