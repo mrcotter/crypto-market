@@ -1,6 +1,6 @@
 <div *ngIf="cryptos">
   <div id="crypto-container" *ngFor="let crypto of cryptos">
-    <span class="left">{{ crypto.cryptoKey }}</span>
-    <span class="right">{{ crypto.cryptoMarketCap}} {{ crypto.cryptoPrice }} {{ crypto.crypto24Change}}</span>
+    <span class="left"><img src="{{ crypto.Image1x }}" srcset="{{ crypto.Image2x }}" />{{ crypto.Name }} {{ crypto.Key }}</span>
+    <span class="right">{{ crypto.MarketCap}} {{ crypto.Price }} {{ crypto.Change24}}</span>
   </div>
 </div> 
