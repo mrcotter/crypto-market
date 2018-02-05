@@ -1,8 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>{{ title }}</h1>
-</div>
+<header class="clearfix" id="header">
+  <div nz-row>
+    <div nz-col [nzXs]="24" [nzSm]="8" [nzMd]="8" [nzLg]="8">
+      <a href id="logo">
+        <span>{{ title }}</span>
+      </a>
+    </div>
+  </div>
+</header>
 <app-crypto-price></app-crypto-price>
-
-
-

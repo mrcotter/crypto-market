@@ -9,9 +9,8 @@ import { Observable } from 'rxjs/Observable';
 })
 export class CryptoPriceComponent implements OnInit {
 
-  private objectKeys = Object.keys;
+  private cryptos: any;
   private receiveData: any;
-  private cryptos: any[] = [];
   private cryptoNames: string[];
   private cryptoImages1x: string[];
   private cryptoImages2x: string[];
@@ -27,12 +26,12 @@ export class CryptoPriceComponent implements OnInit {
       .subscribe(res => {
         this.receiveData = res.DISPLAY;
 
+        let cryData: any[] = [];
         let coinKeys = Object.keys(this.receiveData);
         let coinValues = Object.values(this.receiveData);
-        //console.log(typeof(coinKeys[0]));
-        //console.log(this.cryptoImages1x);
+        //console.log(cryptos);
         for (let _i = 0; _i < coinKeys.length; _i++) {
-          this.cryptos[_i] = {
+          cryData[_i] = {
             Image1x: this.cryptoImages1x[_i],
             Image2x: this.cryptoImages2x[_i],
             Name: this.cryptoNames[_i],
@@ -40,9 +39,10 @@ export class CryptoPriceComponent implements OnInit {
             Price: coinValues[_i].USD.PRICE,
             MarketCap: coinValues[_i].USD.MKTCAP,
             Change24: coinValues[_i].USD.CHANGE24HOUR
-          };
+          }
+          this.cryptos = JSON.parse(JSON.stringify(Object.values(cryData)));
         }
-        //console.log(typeof(Object.keys(this.cryptos)));
+        //console.log(this.cryptos);
       });
   }
 

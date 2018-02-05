@@ -1,6 +1,44 @@
 <div *ngIf="cryptos">
-  <div id="crypto-container" *ngFor="let crypto of cryptos">
-    <span class="left"><img src="{{ crypto.Image1x }}" srcset="{{ crypto.Image2x }}" />{{ crypto.Name }} {{ crypto.Key }}</span>
-    <span class="right">{{ crypto.MarketCap}} {{ crypto.Price }} {{ crypto.Change24}}</span>
+  <div id="crypto-table">
+    <div class="table-operations">
+      <button nz-button (click)="sort(null,null);">Clear Sorters</button>
+    </div>
+    <nz-table #nzTable [nzDataSource]="cryptos" [nzPageSize]="10">
+      <thead nz-thead>
+        <tr>
+          <th nz-th>
+            <span></span>
+          </th>
+          <th nz-th>
+            <span>Name</span>
+          </th>
+          <th nz-th>
+            <span>Symbol</span>
+          </th>
+          <th nz-th>
+            <span>Price</span>
+          </th>
+          <th nz-th>
+            <span>Market Cap</span>
+          </th>
+          <th nz-th>
+            <span>Chg (24H)</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let crypto of nzTable.data">
+          <td nz-td class="flag">
+              <img src="{{ crypto.Image1x }}" srcset="{{ crypto.Image2x }}" />
+          </td>
+          <td nz-td class="cryptoName">{{ crypto.Name }}</td>
+          <td nz-td>{{ crypto.Key }}</td>
+          <td nz-td class="price">{{ crypto.Price }}</td>
+          <td nz-td>{{ crypto.MarketCap }}</td>
+          <td nz-td class="change24">{{ crypto.Change24 }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
   </div>
-</div> 
+
+</div>

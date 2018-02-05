@@ -22,7 +22,7 @@ import { CryptoPriceComponent } from './crypto-price/crypto-price.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgZorroAntdModule.forRoot()
+    NgZorroAntdModule.forRoot({ extraFontName: 'anticon', extraFontUrl: './assets/fonts/iconfont' })
   ],
   providers: [DataService, { provide: NZ_LOCALE, useValue: enUS } ],
   bootstrap: [AppComponent]

@@ -1,0 +1,23 @@
+#header {
+    -webkit-transition: opacity .5s;
+    transition: opacity .5s;
+    background: #fff;
+    height: 80px;
+    margin: 0 auto 24px auto;
+    width: 80%;
+}
+
+#logo {
+    float: left;
+    height: 80px;
+    line-height: 80px;
+}
+
+#logo span {
+    font-size: 16px;
+    font-family: Raleway,Hiragino Sans GB,sans-serif;
+    height: 100px;
+    line-height: 100px;
+    color: #108ee9;
+    text-transform: uppercase;
+}
