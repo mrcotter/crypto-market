@@ -4,10 +4,25 @@
     padding: 1em;
 }
 
-div#crypto-container {
-    background:white;
-    width: 70%;
-    margin: 0 auto 4px auto;
-    padding: 1em;
-    box-shadow: 1px 1px 0 lightgrey;
+.ant-table-tbody > tr > td {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+}
+
+.table-operations {
+    margin-bottom: 16px;
+}
+
+.table-operations > button {
+    margin-right: 8px;
+}
+
+.flag img {
+    max-width: 23px;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+.cryptoName {
+    font-weight: bold;
 }

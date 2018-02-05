@@ -1,5 +1,10 @@
 body {
     background: #f1f1f1;
     padding:50px;
-    font-family: 'Arial';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+.ant-table {
+    font-size: 14px !important;
 }
