@@ -1,9 +1,6 @@
 <div *ngIf="cryptos">
   <div id="crypto-table">
-    <div class="table-operations">
-      <button nz-button (click)="sort(null,null);">Clear Sorters</button>
-    </div>
-    <nz-table #nzTable [nzDataSource]="cryptos">
+    <nz-table #nzTable [nzDataSource]="cryptos" [nzIsPagination]="false">
       <thead nz-thead>
         <tr>
           <th nz-th>
@@ -24,14 +21,14 @@
       </thead>
       <tbody nz-tbody>
         <tr nz-tbody-tr *ngFor="let crypto of nzTable.data">
-          <td nz-td class="cryptoName flag">
+          <td nz-td class="crypto-name flag">
             <img src="{{ crypto.Image1x }}" srcset="{{ crypto.Image2x }}" />
             {{ crypto.Name }}
           </td>
-          <td nz-td>{{ crypto.Key }}</td>
-          <td nz-td class="price">{{ crypto.Price }}</td>
-          <td nz-td>{{ crypto.MarketCap }}</td>
-          <td nz-td class="change24">{{ crypto.Change24 }}</td>
+          <td nz-td class="crypto-symbol">{{ crypto.Key }}</td>
+          <td nz-td [ngClass]="{'price-up': (crypto.PriceCompare > 0 && showloader), 'price-down': (crypto.PriceCompare < 0 && showloader) }" class="crypto-price">{{ crypto.Price }}</td>
+          <td nz-td class="crypto-market-cap">{{ crypto.MarketCap }}</td>
+          <td nz-td [ngClass]="(crypto.Change24Num > 0) ? 'change24-green' : 'change24-red'" class="crypto-change24">{{ crypto.Change24 }}</td>
         </tr>
       </tbody>
     </nz-table>

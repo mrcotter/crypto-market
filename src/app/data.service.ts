@@ -28,7 +28,7 @@ export class DataService {
 
   // Fetch price data every 10 seconds
   getPricesFull(): Observable<any> {
-    return Observable.interval(100000).startWith(0)
+    return Observable.interval(10000).startWith(0)
       .mergeMapTo(this._http.get(this.url))
       .map(result => this.result = result);
   }

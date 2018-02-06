@@ -23,6 +23,27 @@
     margin-right: 4px;
 }
 
-.cryptoName {
+.crypto-name {
     font-weight: bold;
+}
+
+.crypto-price, .crypto-market-cap,
+.crypto-change24, .crypto-symbol {
+    font-weight: bold;
+}
+
+.price-up {
+    background-color: #ebf8f2;
+}
+
+.price-down {
+    background-color: #fef0ef;
+}
+
+.change24-green {
+    color: #2ac27a;
+}
+
+.change24-red {
+    color: #ff6060;
 }
