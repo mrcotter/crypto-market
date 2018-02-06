@@ -10,19 +10,23 @@ import { DataService } from './data.service';
 
 import { AppComponent } from './app.component';
 import { CryptoPriceComponent } from './crypto-price/crypto-price.component';
+import { CryptoDetailComponent } from './crypto-detail/crypto-detail.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CryptoPriceComponent
+    CryptoPriceComponent,
+    CryptoDetailComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgZorroAntdModule.forRoot({ extraFontName: 'anticon', extraFontUrl: './assets/fonts/iconfont' })
+    NgZorroAntdModule.forRoot({ extraFontName: 'anticon', extraFontUrl: './assets/fonts/iconfont' }),
+    AppRoutingModule
   ],
   providers: [DataService, { provide: NZ_LOCALE, useValue: enUS } ],
   bootstrap: [AppComponent]
