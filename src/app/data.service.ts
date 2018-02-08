@@ -10,8 +10,8 @@ export class DataService {
   private coinlist: string = "BTC,ETH,XRP,BCH,ADA,XLM,NEO,LTC,EOS,XEM";
   private url: string = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + this.coinlist + "&tsyms=USD";
 
-  private symbolnameData: string[] = [ 'Bitcoin', 'Ethereum', 'Ripple', 'Bitcoin Cash', 'Cardano',
-                                      'Stellar', 'NEO', 'Litecoin', 'EOS', 'NEM'];
+  private symbolnameData: string[] = ['Bitcoin', 'Ethereum', 'Ripple', 'Bitcoin Cash', 'Cardano',
+    'Stellar', 'NEO', 'Litecoin', 'EOS', 'NEM'];
 
   private urlPrefix: string = "http://p3k7sti9o.bkt.clouddn.com/";
   private urlSuffix: string[] = this.coinlist.toLowerCase().split(',');
@@ -28,7 +28,8 @@ export class DataService {
 
   // Fetch price data every 10 seconds
   getPricesFull(): Observable<any> {
-    return Observable.interval(10000).startWith(0)
+    // modify back to 10000
+    return Observable.interval(100000).startWith(0)
       .mergeMapTo(this._http.get(this.url))
       .map(result => this.result = result);
   }
@@ -43,6 +44,12 @@ export class DataService {
 
   getImages2xFull(): any[] {
     return this.images2x;
+  }
+
+  // Fetch hourly price historical data
+  getMinutePrices(symbol: string, limit: number): Observable<any> {
+    return this._http.get("https://min-api.cryptocompare.com/data/histominute?fsym=" + symbol + "&tsym=USD&limit=" + limit + "&aggregate=15")
+      .map(result => result);
   }
 
 }

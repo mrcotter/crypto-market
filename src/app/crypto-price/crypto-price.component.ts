@@ -3,6 +3,7 @@ import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/timer';
+import { Crypto } from '../crypto';
 
 @Component({
   selector: 'app-crypto-price',
@@ -11,7 +12,9 @@ import 'rxjs/add/observable/timer';
 })
 export class CryptoPriceComponent implements OnInit {
 
-  private cryptos: any;
+  private cryptos: Crypto[];
+  private selectedCrypto: Crypto;
+
   private receiveData: any;
   private cryptoNames: string[];
   private cryptoImages1x: string[];
@@ -19,7 +22,7 @@ export class CryptoPriceComponent implements OnInit {
   private cryptoLastPrices: number[];
   private cryptoPriceCompare: number[];
 
-  public showloader: boolean = false;      
+  private showloader: boolean = false;      
   private subscription: Subscription;
   private timer: Observable<any>;
 
@@ -37,8 +40,8 @@ export class CryptoPriceComponent implements OnInit {
         this.receiveData = res.DISPLAY;
 
         let cryData: any[] = [];
-        let coinKeys = Object.keys(this.receiveData);
-        let coinValues = Object.values(this.receiveData);
+        let coinKeys: any = Object.keys(this.receiveData);
+        let coinValues: any = Object.values(this.receiveData);
         //console.log(this.cryptoLastPrices.length);
 
         if (this.cryptoLastPrices.length === 0) {
@@ -86,6 +89,11 @@ export class CryptoPriceComponent implements OnInit {
       // set showloader to false to hide loading div from view after 1 seconds
       this.showloader = false;
     });
+  }
+
+  onSelect (crypto: Crypto): void {
+    this.selectedCrypto = crypto;
+    //console.log(this.selectedCrypto);
   }
 
 }

@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody nz-tbody>
-        <tr nz-tbody-tr *ngFor="let crypto of nzTable.data">
+        <tr nz-tbody-tr *ngFor="let crypto of nzTable.data" (click)="onSelect(crypto)">
           <td nz-td class="crypto-name flag">
             <img src="{{ crypto.Image1x }}" srcset="{{ crypto.Image2x }}" />
             {{ crypto.Name }}
@@ -33,5 +33,6 @@
       </tbody>
     </nz-table>
   </div>
-
 </div>
+
+<app-crypto-detail [crypto]="selectedCrypto"></app-crypto-detail>

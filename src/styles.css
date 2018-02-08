@@ -1,8 +1,17 @@
 body {
     background: #f1f1f1;
-    padding:50px;
+    padding-bottom: 6rem;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+}
+
+nz-layout, nz-header, nz-content,
+.ant-layout {
+    background: #fff !important;
+}
+
+nz-layout {
+    height: 100vh;
 }
 
 .ant-table {
