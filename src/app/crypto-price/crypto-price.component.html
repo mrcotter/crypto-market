@@ -20,19 +20,17 @@
         </tr>
       </thead>
       <tbody nz-tbody>
-        <tr nz-tbody-tr *ngFor="let crypto of nzTable.data" (click)="onSelect(crypto)">
+        <tr nz-tbody-tr *ngFor="let crypto of nzTable.data" routerLink="/{{ crypto.symbol | lowercase }}">
           <td nz-td class="crypto-name flag">
-            <img src="{{ crypto.Image1x }}" srcset="{{ crypto.Image2x }}" />
-            {{ crypto.Name }}
+            <img src="{{ crypto.image1x }}" srcset="{{ crypto.image2x }}" />
+            {{ crypto.name }}
           </td>
-          <td nz-td class="crypto-symbol">{{ crypto.Key }}</td>
-          <td nz-td [ngClass]="{'price-up': (crypto.PriceCompare > 0 && showloader), 'price-down': (crypto.PriceCompare < 0 && showloader) }" class="crypto-price">{{ crypto.Price }}</td>
-          <td nz-td class="crypto-market-cap">{{ crypto.MarketCap }}</td>
-          <td nz-td [ngClass]="(crypto.Change24Num > 0) ? 'change24-green' : 'change24-red'" class="crypto-change24">{{ crypto.Change24 }}</td>
+          <td nz-td class="crypto-symbol">{{ crypto.symbol }}</td>
+          <td nz-td [ngClass]="{'price-up': (crypto.priceCompare > 0 && showloader), 'price-down': (crypto.PriceCompare < 0 && showloader) }" class="crypto-price">{{ crypto.price }}</td>
+          <td nz-td class="crypto-market-cap">{{ crypto.marketCap }}</td>
+          <td nz-td [ngClass]="(crypto.change24Num > 0) ? 'change24-green' : 'change24-red'" class="crypto-change24">{{ crypto.change24 }}</td>
         </tr>
       </tbody>
     </nz-table>
   </div>
 </div>
-
-<app-crypto-detail [crypto]="selectedCrypto"></app-crypto-detail>

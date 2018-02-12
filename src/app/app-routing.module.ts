@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { CryptoPriceComponent } from './crypto-price/crypto-price.component';
+import { CryptoDetailComponent } from './crypto-detail/crypto-detail.component';
+
+const routes: Routes = [
+  { path: '', component: CryptoPriceComponent },
+  { path: ':symbol', component: CryptoDetailComponent },
+];
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: []
+  imports: [ RouterModule.forRoot(routes) ],
+  exports: [ RouterModule ]
 })
 export class AppRoutingModule { }

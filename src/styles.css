@@ -5,6 +5,11 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+a {
+    cursor: pointer;
+    cursor: hand;
+  }
+
 nz-layout, nz-header, nz-content,
 .ant-layout {
     background: #fff !important;

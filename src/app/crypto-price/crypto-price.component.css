@@ -25,6 +25,7 @@
 
 .crypto-name {
     font-weight: bold;
+    cursor: pointer;
 }
 
 .crypto-price, .crypto-market-cap,

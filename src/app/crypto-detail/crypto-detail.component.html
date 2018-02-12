@@ -1,34 +1,17 @@
-<div *ngIf="crypto">
+<div *ngIf="cryptox">
 
-  <nz-layout>
-    <nz-header class="clearfix" id="header">
-      <div nz-row>
-        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
-          <a href id="logo">
-            <span>{{ crypto.Name }}</span>
-          </a>
-        </div>
-      </div>
-    </nz-header>
-
-    <nz-content>
-      <canvas id="canvas">{{ chart }}</canvas>
-    </nz-content>
-
-    <nz-footer class="clearfix" id="footer">
-      <div nz-row>
-        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
-          <span>
-            © 2018
-            <a href="https://github.com/mrcotter" target="_blank">
-              <i class="anticon anticon-github"></i> Kris</a>
-            Powered by
-            <a href="https://angular.io/" target="_blank">Angular</a> and
-            <a href="https://ant.design/" target="_blank">Ant Design</a>
-          </span>
-        </div>
-      </div>
-    </nz-footer>
-  </nz-layout>
+  <div nz-row>
+    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
+      <a (click)="goBack()" id="go-back">
+        <i class="anticon anticon-arrow-left"></i>
+      </a>
+      <img src="{{ cryptox.image1x }}" srcset="{{ cryptox.image2x }}" />
+      <span>{{ cryptox.name }}</span>
+    </div>
+  </div>
 
 </div>
+
+<nz-content>
+  <canvas id="canvas">{{ chart }}</canvas>
+</nz-content>

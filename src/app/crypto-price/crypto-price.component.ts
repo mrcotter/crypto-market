@@ -13,7 +13,7 @@ import { Crypto } from '../crypto';
 export class CryptoPriceComponent implements OnInit {
 
   private cryptos: Crypto[];
-  private selectedCrypto: Crypto;
+  public cryData: any[];
 
   private receiveData: any;
   private cryptoNames: string[];
@@ -22,7 +22,7 @@ export class CryptoPriceComponent implements OnInit {
   private cryptoLastPrices: number[];
   private cryptoPriceCompare: number[];
 
-  private showloader: boolean = false;      
+  private showloader: boolean = false;
   private subscription: Subscription;
   private timer: Observable<any>;
 
@@ -32,20 +32,21 @@ export class CryptoPriceComponent implements OnInit {
     this.cryptoImages2x = this._data.getImages2xFull();
     this.cryptoLastPrices = [];
     this.cryptoPriceCompare = [];
+    this.cryData = [];
   }
 
   ngOnInit() {
+
     this._data.getPricesFull()
       .subscribe(res => {
         this.receiveData = res.DISPLAY;
 
-        let cryData: any[] = [];
         let coinKeys: any = Object.keys(this.receiveData);
         let coinValues: any = Object.values(this.receiveData);
         //console.log(this.cryptoLastPrices.length);
 
         if (this.cryptoLastPrices.length === 0) {
-          
+
           for (let _i = 0; _i < coinKeys.length; _i++) {
             this.cryptoLastPrices[_i] = parseFloat((coinValues[_i].USD.PRICE).substring(2).replace(/,/g, ''));
             this.cryptoPriceCompare[_i] = (parseFloat((coinValues[_i].USD.PRICE).substring(2).replace(/,/g, '')) -
@@ -60,40 +61,37 @@ export class CryptoPriceComponent implements OnInit {
         //console.log(this.cryptoLastPrices);
 
         for (let _i = 0; _i < coinKeys.length; _i++) {
-          cryData[_i] = {
-            Image1x: this.cryptoImages1x[_i],
-            Image2x: this.cryptoImages2x[_i],
-            Name: this.cryptoNames[_i],
-            Key: coinKeys[_i],
-            Price: coinValues[_i].USD.PRICE,
-            MarketCap: coinValues[_i].USD.MKTCAP,
-            Change24: coinValues[_i].USD.CHANGE24HOUR,
-            Change24Num: parseFloat((coinValues[_i].USD.CHANGE24HOUR).substring(2).replace(/,/g, '')),
-            PriceCompare: this.cryptoPriceCompare[_i]
+          this.cryData[ coinKeys[_i] ] = {
+            image1x: this.cryptoImages1x[_i],
+            image2x: this.cryptoImages2x[_i],
+            name: this.cryptoNames[_i],
+            symbol: coinKeys[_i],
+            price: coinValues[_i].USD.PRICE,
+            marketCap: coinValues[_i].USD.MKTCAP,
+            change24: coinValues[_i].USD.CHANGE24HOUR,
+            change24Num: parseFloat((coinValues[_i].USD.CHANGE24HOUR).substring(2).replace(/,/g, '')),
+            priceCompare: this.cryptoPriceCompare[_i]
           }
 
           this.cryptoLastPrices[_i] = parseFloat((coinValues[_i].USD.PRICE).substring(2).replace(/,/g, ''));
-          this.cryptos = JSON.parse(JSON.stringify(Object.values(cryData)));
+          this.cryptos = JSON.parse(JSON.stringify(Object.values(this.cryData)));
+          
         }
-        //console.log(this.cryptoPriceCompare);
+        //console.log(cryData);
         this.setTimer();
       });
+
   }
 
   setTimer() {
-    // set showloader to true to show loading div on view
+    // set showloader to true to show colored div on view
     this.showloader = true;
     this.timer = Observable.timer(1500);
 
     this.subscription = this.timer.subscribe(() => {
-      // set showloader to false to hide loading div from view after 1 seconds
+      // set showloader to false to hide colored div from view after 1.5 seconds
       this.showloader = false;
     });
-  }
-
-  onSelect (crypto: Crypto): void {
-    this.selectedCrypto = crypto;
-    //console.log(this.selectedCrypto);
   }
 
 }

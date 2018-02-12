@@ -3,7 +3,7 @@
   <nz-header class="clearfix" id="header">
     <div nz-row>
       <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
-        <a href id="logo">
+        <a routerLink="/cryptos" id="logo">
           <span>{{ title | uppercase }}</span>
         </a>
       </div>
@@ -11,7 +11,7 @@
   </nz-header>
 
   <nz-content>
-    <app-crypto-price></app-crypto-price>
+    <router-outlet></router-outlet>
   </nz-content>
 
   <nz-footer class="clearfix" id="footer">

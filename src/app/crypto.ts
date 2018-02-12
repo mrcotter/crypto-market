@@ -1,11 +1,19 @@
 export class Crypto {
-    Image1x: string;
-    Image2x: string;
-    Name: string;
-    Key: string;
-    Price: string;
-    MarketCap: string;
-    Change24: string;
-    Change24Num: number;
-    PriceCompare: number;
-  }
+  image1x: string;
+  image2x: string;
+  name: string;
+  symbol: string;
+  price: string;
+  marketCap: string;
+  change24: string;
+  change24Num: number;
+  priceCompare: number;
+}
+
+export class CryptoX {
+  image1x: string;
+  image2x: string;
+  name: string;
+  symbol: string;
+  price: number;
+}
