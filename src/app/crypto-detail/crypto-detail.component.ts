@@ -12,7 +12,7 @@ import { Crypto, CryptoX } from '../crypto';
 })
 export class CryptoDetailComponent implements OnInit {
 
-  private cryptox: CryptoX;
+  cryptox: CryptoX;
   private cryptoName: string;
   private cryptoPrice: number;
   private cryptoImage1x: string;
@@ -21,7 +21,33 @@ export class CryptoDetailComponent implements OnInit {
   private symbol: string;
 
   private chart: any;
-  private time24hLimit: number = 1440;
+  private selectedType: string;
+  private timeLimit: number;
+  private aggregate: number;
+
+  private selectedIndex = 0;
+  private tabs = [
+    {
+      name: '24 HOURS',
+      index: 0,
+      content: this.chart
+    },
+    {
+      name: '7 DAYS',
+      index: 1,
+      content: this.chart
+    },
+    {
+      name: '1 MONTH',
+      index: 2,
+      content: this.chart
+    },
+    {
+      name: '1 YEAR',
+      index: 3,
+      content: this.chart
+    }
+  ];
 
   constructor(
     private _data: DataService,
@@ -30,6 +56,7 @@ export class CryptoDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.symbol = this._route.snapshot.paramMap.get('symbol').toUpperCase();
     //console.log( this.crypto == null );
 
@@ -50,12 +77,16 @@ export class CryptoDetailComponent implements OnInit {
           price: this.cryptoPrice
         };
         //console.log(this.cryptox);
-        this.drawChart();
-
+        this.drawChart("A", 1440, 15);
       });
   }
 
-  drawChart(): any {
+  drawChart(type: string, timelimit: number, aggregate: number): any {
+    // console.log(this.selectedIndex);
+
+    if (this.chart != null) {
+      this.chart.destroy();
+    }
     // Set global chart config
     Chart.defaults.global.defaultFontFamily = '"Helvetica Neue For Number", -apple-system, Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif';
     Chart.defaults.LineWithLine = Chart.defaults.line;
@@ -84,10 +115,34 @@ export class CryptoDetailComponent implements OnInit {
     });
 
     let priceChart: any, alldates: any, cryptoDates: any[];
+    let prefix: string;
+    let canvasID: string;
+    switch (type) {
+      case "A": {
+        canvasID = "canvas-0";
+        prefix = "histominute";
+        break;
+      }
+      case "B": {
+        canvasID = "canvas-1";
+        prefix = "histohour";
+        break;
+      }
+      case "C": {
+        canvasID = "canvas-2";
+        prefix = "histohour";
+        break;
+      }
+      case "D": {
+        canvasID = "canvas-3";
+        prefix = "histoday";
+        break;
+      }
+    }
 
-    this._data.getMinutePrices(this.symbol, this.time24hLimit)
+    this._data.getHitoricalPrices(this.symbol, prefix, timelimit, aggregate)
       .subscribe(res => {
-        //console.log(res.Data);
+        // console.log(res.Data);
         //console.log(res.Data.length());
         priceChart = res['Data'].map(res => res.close);
         alldates = res['Data'].map(res => res.time);
@@ -100,7 +155,7 @@ export class CryptoDetailComponent implements OnInit {
         });
 
         // Draw new chart
-        this.chart = new Chart('canvas', {
+        this.chart = new Chart(canvasID, {
           type: 'LineWithLine',
           data: {
             labels: cryptoDates,
@@ -113,72 +168,9 @@ export class CryptoDetailComponent implements OnInit {
               }
             ]
           },
-          options: {
-            tooltips: {
-              mode: 'label',
-              intersect: false,
-              titleFontColor: "#7289a1",
-              bodyFontSize: 14,
-              bodyFontStyle: "bold",
-              bodySpacing: 6,
-              yPadding: 8,
-              custom: function (tooltip) {
-                // remove color square label
-                if (!tooltip) return;
-                // disable displaying the color box;
-                tooltip.displayColors = false;
-              },
-              callbacks: {
-                label: function (tooltipItem, data) {
-                  // Add a dollar sign, rounding, and thousands commas
-                  return "$ " + Number(tooltipItem.yLabel).toFixed(2).replace(/./g, function (c, i, a) {
-                    return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-                  });
-                }
-              }
-            },
-            elements: {
-              point: {
-                radius: 0,
-                hitRadius: 8,
-                hoverRadius: 6
-              }
-            },
-            legend: {
-              display: false
-            },
-            scales: {
-              xAxes: [{
-                display: true,
-                ticks: {
-                  autoSkip: true,
-                  maxTicksLimit: 5,
-                  maxRotation: 0,
-                  fontSize: 12,
-                  fontStyle: "bold",
-                  fontColor: "#7289a1"
-                },
-                gridLines: {
-                  display: false
-                }
-              }],
-              yAxes: [{
-                position: 'right',
-                display: true,
-                ticks: {
-                  // Include a $ sign in the ticks
-                  callback: function (value, index, values) {
-                    return '$ ' + value;
-                  },
-                  autoSkip: true,
-                  maxTicksLimit: 5,
-                  fontSize: 12,
-                  fontStyle: "bold"
-                },
-              }],
-            }
-          }
+          options: this.chartOptions
         });
+
       });
 
   }
@@ -186,5 +178,118 @@ export class CryptoDetailComponent implements OnInit {
   goBack(): void {
     this._location.back();
   }
+
+  selectChange() {
+    switch (this.selectedIndex) {
+      case 0: {
+        this.selectedType = "A";
+        this.timeLimit = 1440;
+        this.aggregate = 15;
+        this.drawChart(this.selectedType, this.timeLimit, this.aggregate);
+        break;
+      }
+      case 1: {
+        this.selectedType = "B";
+        this.timeLimit = 168;
+        this.aggregate = 1;
+        this.drawChart(this.selectedType, this.timeLimit, this.aggregate);
+        break;
+      }
+      case 2: {
+        this.selectedType = "C";
+        this.timeLimit = 720;
+        this.aggregate = 10;
+        this.drawChart(this.selectedType, this.timeLimit, this.aggregate);
+        break;
+      }
+      case 3: {
+        this.selectedType = "D";
+        this.timeLimit = 365;
+        this.aggregate = 2;
+        this.drawChart(this.selectedType, this.timeLimit, this.aggregate);
+        break;
+      }
+    }
+  }
+
+  private chartOptions: any = {
+    layout: {
+      padding: {
+        left: 0,
+        right: 0,
+        top: 50,
+        bottom: 0
+      }
+    },
+    tooltips: {
+      mode: 'label',
+      intersect: false,
+      titleFontColor: "#7289a1",
+      bodyFontSize: 14,
+      bodyFontStyle: "bold",
+      bodySpacing: 6,
+      yPadding: 8,
+      custom: function (tooltip) {
+        // remove color square label
+        if (!tooltip) return;
+        // disable displaying the color box;
+        tooltip.displayColors = false;
+      },
+      callbacks: {
+        label: function (tooltipItem, data) {
+          // Add a dollar sign, rounding, and thousands commas
+          return "$ " + Number(tooltipItem.yLabel).toFixed(2).replace(/./g, function (c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+        }
+      }
+    },
+    elements: {
+      point: {
+        radius: 0,
+        borderWidth: 2,
+        hitRadius: 8,
+        hoverRadius: 6
+      }
+    },
+    legend: {
+      display: false
+    },
+    scales: {
+      xAxes: [{
+        display: true,
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 5,
+          maxRotation: 0,
+          fontSize: 12,
+          fontStyle: "bold",
+          fontColor: "#7289a1",
+          padding: 8
+        },
+        gridLines: {
+          display: false
+        }
+      }],
+      yAxes: [{
+        position: 'right',
+        display: true,
+        gridLines: {
+          drawBorder: false,
+        },
+        ticks: {
+          // Include a $ sign in the ticks and 
+          callback: function (value, index, values) {
+            return '$ ' + Number(value).toFixed(2);;
+          },
+          autoSkip: true,
+          maxTicksLimit: 5,
+          fontSize: 12,
+          fontStyle: "bold",
+          padding: 10
+        },
+      }],
+    }
+  };
 
 }

@@ -7,7 +7,6 @@ body {
 
 a {
     cursor: pointer;
-    cursor: hand;
   }
 
 nz-layout, nz-header, nz-content,
@@ -21,4 +20,12 @@ nz-layout {
 
 .ant-table {
     font-size: 14px !important;
+}
+
+nz-tabs-nav {
+    border: none !important;
+}
+
+.ant-tabs-nav-wrap {
+    margin-bottom: 1em !important;
 }

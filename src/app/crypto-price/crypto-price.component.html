@@ -1,36 +1,67 @@
-<div *ngIf="cryptos">
-  <div id="crypto-table">
-    <nz-table #nzTable [nzDataSource]="cryptos" [nzIsPagination]="false">
-      <thead nz-thead>
-        <tr>
-          <th nz-th>
-            <span>Name</span>
-          <th nz-th>
-            <span>Symbol</span>
-          </th>
-          <th nz-th>
-            <span>Price (USD)</span>
-          </th>
-          <th nz-th>
-            <span>Market Cap</span>
-          </th>
-          <th nz-th>
-            <span>Chg (24H)</span>
-          </th>
-        </tr>
-      </thead>
-      <tbody nz-tbody>
-        <tr nz-tbody-tr *ngFor="let crypto of nzTable.data" routerLink="/{{ crypto.symbol | lowercase }}">
-          <td nz-td class="crypto-name flag">
-            <img src="{{ crypto.image1x }}" srcset="{{ crypto.image2x }}" />
-            {{ crypto.name }}
-          </td>
-          <td nz-td class="crypto-symbol">{{ crypto.symbol }}</td>
-          <td nz-td [ngClass]="{'price-up': (crypto.priceCompare > 0 && showloader), 'price-down': (crypto.PriceCompare < 0 && showloader) }" class="crypto-price">{{ crypto.price }}</td>
-          <td nz-td class="crypto-market-cap">{{ crypto.marketCap }}</td>
-          <td nz-td [ngClass]="(crypto.change24Num > 0) ? 'change24-green' : 'change24-red'" class="crypto-change24">{{ crypto.change24 }}</td>
-        </tr>
-      </tbody>
-    </nz-table>
-  </div>
-</div>
+<nz-layout>
+  <nz-header class="clearfix" id="header">
+    <div nz-row>
+      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
+        <a routerLink="" id="logo">
+          <span>CRPTOCURRENCY MARKET</span>
+        </a>
+      </div>
+    </div>
+  </nz-header>
+
+  <nz-content>
+
+    <div *ngIf="cryptos">
+      <div id="crypto-table">
+        <nz-table #nzTable [nzDataSource]="cryptos" [nzIsPagination]="false">
+          <thead nz-thead>
+            <tr>
+              <th nz-th class="col-1">
+                <span>Name</span>
+              </th>
+              <th nz-th class="col-2">
+                <span>Symbol</span>
+              </th>
+              <th nz-th class="col-3">
+                <span>Price (USD)</span>
+              </th>
+              <th nz-th class="col-4">
+                <span>Market Cap</span>
+              </th>
+              <th nz-th class="col-5">
+                <span>Chg (24H)</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let crypto of nzTable.data" routerLink="/{{ crypto.symbol | lowercase }}">
+              <td nz-td class="crypto-name flag col-1">
+                <img src="{{ crypto.image1x }}" srcset="{{ crypto.image2x }}" /> {{ crypto.name }}
+              </td>
+              <td nz-td class="crypto-symbol col-2">{{ crypto.symbol }}</td>
+              <td nz-td [ngClass]="{'price-up': (crypto.priceCompare > 0 && showloader), 'price-down': (crypto.PriceCompare < 0 && showloader) }"
+                class="crypto-price col-3">{{ crypto.price }}</td>
+              <td nz-td class="crypto-market-cap col-4">{{ crypto.marketCap }}</td>
+              <td nz-td [ngClass]="(crypto.change24Num > 0) ? 'change24-green' : 'change24-red'" class="crypto-change24 col-5">{{ crypto.change24 }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+
+  </nz-content>
+
+  <nz-footer class="clearfix" id="footer">
+    <div nz-row>
+      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
+        <span>
+          © 2018
+          <a href="https://github.com/mrcotter" target="_blank">
+            <i class="anticon anticon-github"></i> Kris</a>
+          Powered by
+          <a href="https://angular.io/" target="_blank">Angular</a>
+        </span>
+      </div>
+    </div>
+  </nz-footer>
+</nz-layout>

@@ -12,7 +12,7 @@ import { Crypto } from '../crypto';
 })
 export class CryptoPriceComponent implements OnInit {
 
-  private cryptos: Crypto[];
+  cryptos: Crypto[];
   public cryData: any[];
 
   private receiveData: any;

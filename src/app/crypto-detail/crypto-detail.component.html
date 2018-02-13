@@ -1,17 +1,57 @@
 <div *ngIf="cryptox">
+  <nz-layout>
+    <nz-header class="clearfix" id="header">
+      <div nz-row [nzGutter]="8">
+        <div nz-col [nzXs]="2" [nzSm]="2" [nzMd]="2" [nzLg]="1">
+          <a (click)="goBack()" id="go-back">
+            <i class="anticon anticon-arrow-left"></i>
+          </a>
+        </div>
+        <div nz-col [nzXs]="2" [nzSm]="2" [nzMd]="1" [nzLg]="1">
+          <img class="coin-image" src="{{ cryptox.image1x }}" srcset="{{ cryptox.image2x }}" />
+        </div>
+        <div nz-col [nzXs]="4" [nzSm]="3" [nzMd]="3" [nzLg]="3">
+          <span class="coin-name">{{ cryptox.name }}</span>
+        </div>
+        <div nz-col [nzXs]="4" [nzSm]="3" [nzMd]="3" [nzLg]="3">
+          <span class="coin-price">
+            <span class="dollar-sign">$ </span>{{ cryptox.price }}</span>
+        </div>
+      </div>
+    </nz-header>
 
-  <div nz-row>
-    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
-      <a (click)="goBack()" id="go-back">
-        <i class="anticon anticon-arrow-left"></i>
-      </a>
-      <img src="{{ cryptox.image1x }}" srcset="{{ cryptox.image2x }}" />
-      <span>{{ cryptox.name }}</span>
-    </div>
-  </div>
+
+    <nz-content>
+
+      <div nz-row id="canvas-content">
+
+        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
+          <nz-tabset [(nzSelectedIndex)]="selectedIndex" (nzSelectChange)="selectChange()">
+            <nz-tab *ngFor="let tab of tabs">
+              <ng-template #nzTabHeading>
+                {{tab.name}}
+              </ng-template>
+              <canvas id="canvas-{{ tab.index }}">{{ tab.content }}</canvas>
+            </nz-tab>
+          </nz-tabset>
+        </div>
+      </div>
+
+    </nz-content>
+
+    <nz-footer class="clearfix" id="footer">
+      <div nz-row>
+        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
+          <span>
+            © 2018
+            <a href="https://github.com/mrcotter" target="_blank">
+              <i class="anticon anticon-github"></i> Kris</a>
+            Powered by
+            <a href="https://angular.io/" target="_blank">Angular</a>
+          </span>
+        </div>
+      </div>
+    </nz-footer>
+  </nz-layout>
 
 </div>
-
-<nz-content>
-  <canvas id="canvas">{{ chart }}</canvas>
-</nz-content>

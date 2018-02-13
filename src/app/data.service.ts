@@ -9,7 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class DataService {
 
   private result: any;
-  private coinlist: string = "BTC,ETH,XRP,BCH,ADA,XLM,NEO,LTC,EOS,XEM";
+  private coinlist: string = "BTC,ETH,XRP,BCH,ADA,LTC,NEO,XLM,EOS,XEM";
   private priceMultiurl: string = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + this.coinlist + "&tsyms=USD";
 
   private symbolnameData: any = {
@@ -18,9 +18,9 @@ export class DataService {
     'XRP': 'Ripple',
     'BCH': 'Bitcoin Cash',
     'ADA': 'Cardano',
-    'XLM': 'Stellar',
-    'NEO': 'NEO',
     'LTC': 'Litecoin',
+    'NEO': 'NEO',
+    'XLM': 'Stellar',
     'EOS': 'EOS',
     'XEM': 'NEM'
   };
@@ -41,7 +41,7 @@ export class DataService {
   // Fetch price data every 10 seconds
   getPricesFull(): Observable<any> {
     // modify back to 10000
-    return Observable.interval(100000).startWith(0)
+    return Observable.interval(10000).startWith(0)
       .mergeMapTo(this._http.get(this.priceMultiurl))
       .map(result => this.result = result)
       .pipe(catchError(this.handleError('getPricesFull', [])));
@@ -79,11 +79,12 @@ export class DataService {
     return this.urlPrefix + symbol.toLowerCase() + "@2x.png"
   }
 
-  // Fetch hourly price historical data
-  getMinutePrices(symbol: string, limit: number): Observable<any> {
-    return this._http.get("https://min-api.cryptocompare.com/data/histominute?fsym=" + `${symbol}` + "&tsym=USD&limit=" + limit + "&aggregate=15")
+  // Fetch minute/hourly/daily price of historical data
+  getHitoricalPrices(symbol: string, prefix: string, timelimit: number, aggregate: number): Observable<any> {
+    // console.log(this._http.get("https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + `${symbol}` + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate));
+    return this._http.get("https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + `${symbol}` + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate)
       .map(result => this.result = result)
-      .pipe(catchError(this.handleError(`getMinutePrices symbol=${symbol}`)));
+      .pipe(catchError(this.handleError(`getHitoricalPrices symbol=${symbol}`)));
   }
 
   /**
