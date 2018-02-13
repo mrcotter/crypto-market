@@ -2,18 +2,16 @@
   <nz-layout>
     <nz-header class="clearfix" id="header">
       <div nz-row [nzGutter]="8">
-        <div nz-col [nzXs]="2" [nzSm]="2" [nzMd]="2" [nzLg]="1">
+        <div nz-col [nzXs]="3" [nzSm]="2" [nzMd]="2" [nzLg]="2">
           <a (click)="goBack()" id="go-back">
             <i class="anticon anticon-arrow-left"></i>
           </a>
         </div>
-        <div nz-col [nzXs]="2" [nzSm]="2" [nzMd]="1" [nzLg]="1">
+        <div nz-col [nzXs]="12" [nzSm]="10" [nzMd]="8" [nzLg]="8">
           <img class="coin-image" src="{{ cryptox.image1x }}" srcset="{{ cryptox.image2x }}" />
-        </div>
-        <div nz-col [nzXs]="4" [nzSm]="3" [nzMd]="3" [nzLg]="3">
           <span class="coin-name">{{ cryptox.name }}</span>
         </div>
-        <div nz-col [nzXs]="4" [nzSm]="3" [nzMd]="3" [nzLg]="3">
+        <div nz-col [nzXs]="8" [nzSm]="6" [nzMd]="4" [nzLg]="3" class="header-last">
           <span class="coin-price">
             <span class="dollar-sign">$ </span>{{ cryptox.price }}</span>
         </div>
@@ -31,7 +29,9 @@
               <ng-template #nzTabHeading>
                 {{tab.name}}
               </ng-template>
-              <canvas id="canvas-{{ tab.index }}">{{ tab.content }}</canvas>
+              <div class="canvas-container">
+                <canvas id="canvas-{{ tab.index }}">{{ tab.content }}</canvas>
+              </div>
             </nz-tab>
           </nz-tabset>
         </div>

@@ -8,6 +8,10 @@
     width: 80%;
 }
 
+.header-last {
+    float: right;
+}
+
 #footer {
     padding: 1rem;
     background: #ececec;
@@ -27,7 +31,7 @@
     font-size: 18px;
     letter-spacing: .1em;
     overflow: hidden;
-    padding-left: 0.2em;
+    margin-left: 0.4em;
 }
 
 #header .coin-price {
@@ -49,3 +53,167 @@
     margin: 0 auto 42px auto;
     width: 80%;
 }
+
+@media all and (min-width: 768px) and (max-width: 960px) {
+
+    #header .coin-price {
+        margin-left: 0.4em;
+    }
+}
+
+@media all and (max-width: 640px) {
+    #canvas-content {
+        width: 95%;
+    }
+
+    #header {
+        width: 95%;
+    }
+
+    #header .coin-image {
+        max-width: 34px;
+    }
+}
+
+@media all and (max-width: 479px) {
+    #go-back>i {
+        font-size: 24px;
+    }
+
+    #header .coin-name {
+        font-size: 13px;
+    }
+
+    #header .coin-image {
+        max-width: 30px;
+    }
+
+    #header .coin-price {
+        font-size: 13px;
+    } 
+
+}
+
+@media all and (max-width: 350px) {
+    #go-back>i {
+        font-size: 20px;
+    }
+
+    #header .coin-name {
+        font-size: 12px;
+    }
+
+    #header .coin-image {
+        max-width: 28px;
+    }
+
+    #header .coin-price {
+        font-size: 12px;
+    }   
+}
+
+@media (min-width:960px) {
+    .canvas-container {
+        height: 480px;
+    }
+}
+@media (min-width:1024px) {
+    .canvas-container {
+        height: 500px;
+    }
+}
+@media (min-width:1280px) {
+    .canvas-container {
+        height: 560px;
+    }
+}
+@media (min-width:1400px) {
+    .canvas-container {
+        height: 600px;
+    }
+}
+@media (min-width:1600px) {
+    .canvas-container {
+        height: 720px;
+    }
+}
+@media (min-width:1900px) {
+    .canvas-container {
+        height: 800px;
+    }
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) {
+    .canvas-container {
+        height: 200px;
+    }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) {
+    .canvas-container {
+        height: 320px;
+    }
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-height : 1024px) and (orientation : landscape) {
+    .canvas-container {
+        height: 480px;
+    }
+}
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-height : 1024px) and (orientation : portrait) {
+    .canvas-container {
+        height: 640px;
+    }
+}
+
+/* iphone 5 */
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
+    .canvas-container {
+        height: 180px;
+    }
+}
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2) {
+    .canvas-container {
+        height: 300px;
+    }
+}
+
+/* iPhone 6,7,8 ----------- */
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+    .canvas-container {
+        height: 300px;
+    }
+}
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+    .canvas-container {
+        height: 400px;
+    }
+}
+
+/* iPhone 6+ ----------- */
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
+    .canvas-container {
+        height: 320px;
+    }
+}
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
+    .canvas-container {
+        height: 450px;
+    }
+}
+/* iphone X */
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3) {
+    .canvas-container {
+        height: 300px;
+    }
+}
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3) {
+    .canvas-container {
+        height: 480px;
+    }
+}
+

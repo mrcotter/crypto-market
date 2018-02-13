@@ -213,6 +213,8 @@ export class CryptoDetailComponent implements OnInit {
   }
 
   private chartOptions: any = {
+    responsive: true,
+    maintainAspectRatio: false,
     layout: {
       padding: {
         left: 0,

@@ -29,3 +29,14 @@ nz-tabs-nav {
 .ant-tabs-nav-wrap {
     margin-bottom: 1em !important;
 }
+
+.ant-tabs-bar {
+    margin-bottom: 0 !important;
+}
+
+@media all and (max-width: 479px) {
+    .ant-tabs-tab {
+        font-size: 12px !important;
+        margin-right: 6px !important;
+    }
+}

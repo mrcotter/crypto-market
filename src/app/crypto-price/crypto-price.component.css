@@ -81,3 +81,75 @@
 .change24-red {
     color: #ff6060;
 }
+
+@media all and (min-width: 600px) and (max-width: 800px) {
+    #logo span {
+        font-size: 1.8em;
+    }
+}
+
+@media all and (max-width: 640px) {
+    #crypto-table {
+        width: 95%;
+    }
+
+    #header {
+        width: 95%;
+    }
+}
+
+@media all and (min-width: 480px) {
+    .full-width-breakpoint {  
+        display:none;
+        line-height:0;  
+    }
+}
+
+@media all and (min-width: 480px) and (max-width: 599px) {
+    #logo span {
+        font-size: 1.4em;
+    }
+}
+
+@media all and (max-width: 530px) {
+    .col-4 {
+        display: none;
+    }
+}
+
+@media all and (min-width: 360px) and (max-width: 479px) {
+
+}
+
+@media all and (max-width: 479px) {
+    #logo span {
+        font-size: 1.4em;
+        line-height: 18px !important;
+    }
+
+    #logo {
+        line-height: 2.4em !important;
+        margin-top: 3em;
+    }
+
+    #header {
+        height: 100px;
+    }
+}
+
+@media all and (max-width: 430px) {
+    .col-2 {
+        display: none;
+    }
+}
+
+@media all and (max-width: 359px) {
+    #logo span {
+        font-size: 1.4em;
+    }
+}
+@media all and (max-width: 355px) {
+    .col-5 {
+        display: none;
+    }
+}
