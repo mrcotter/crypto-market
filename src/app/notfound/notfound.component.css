@@ -1,5 +1,7 @@
 .container {
     height: 100%;
+    margin: 0 auto;
+    width: 90%;
 }
 
 .text-wrapper {
@@ -29,6 +31,7 @@
   font-size: 40px;
   font-weight: 700;
   color: #108ee9;
+  text-align: center;
 }
 
 .buttons {
@@ -41,7 +44,7 @@
   padding: 15px;
   text-transform: uppercase;
   color: #ff6060;
-  border-radius: 26px;
+  border-radius: 8px;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
