@@ -12,13 +12,15 @@ import { AppComponent } from './app.component';
 import { CryptoPriceComponent } from './crypto-price/crypto-price.component';
 import { CryptoDetailComponent } from './crypto-detail/crypto-detail.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CryptoPriceComponent,
-    CryptoDetailComponent
+    CryptoDetailComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,

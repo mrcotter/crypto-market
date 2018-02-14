@@ -30,6 +30,7 @@
     color: #444956;
     font-size: 18px;
     letter-spacing: .1em;
+    vertical-align: middle;
     overflow: hidden;
     margin-left: 0.4em;
 }
@@ -37,6 +38,8 @@
 #header .coin-price {
     color: #444956;
     font-size: 18px;
+    vertical-align: middle;
+    float: right;
 }
 
 #header .dollar-sign {

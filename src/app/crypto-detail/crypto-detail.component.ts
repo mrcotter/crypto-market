@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { DataService } from '../data.service';
 import { Chart } from 'chart.js';
@@ -52,6 +52,7 @@ export class CryptoDetailComponent implements OnInit {
   constructor(
     private _data: DataService,
     private _route: ActivatedRoute,
+    private _router: Router,
     private _location: Location
   ) { }
 
@@ -59,26 +60,31 @@ export class CryptoDetailComponent implements OnInit {
 
     this.symbol = this._route.snapshot.paramMap.get('symbol').toUpperCase();
     //console.log( this.crypto == null );
+    if (this._data.getNameSingle(this.symbol) == null) {
+      this._router.navigate(['/404']);
+    } else {
+      this.cryptoName = this._data.getNameSingle(this.symbol);
 
-    this.cryptoName = this._data.getNameSingle(this.symbol);
-    this.cryptoImage1x = this._data.getImage1xSingle(this.symbol);
-    this.cryptoImage2x = this._data.getImage2xSingle(this.symbol);
+      this.cryptoImage1x = this._data.getImage1xSingle(this.symbol);
+      this.cryptoImage2x = this._data.getImage2xSingle(this.symbol);
 
-    this._data.getPriceSingle(this.symbol)
-      .subscribe(res => {
-        //console.log(res.USD);
-        this.cryptoPrice = res.USD;
+      this._data.getPriceSingle(this.symbol)
+        .subscribe(res => {
+          //console.log(res.USD);
+          this.cryptoPrice = res.USD;
 
-        this.cryptox = {
-          image1x: this.cryptoImage1x,
-          image2x: this.cryptoImage2x,
-          name: this.cryptoName,
-          symbol: this.symbol,
-          price: this.cryptoPrice
-        };
-        //console.log(this.cryptox);
-        this.drawChart("A", 1440, 15);
-      });
+          this.cryptox = {
+            image1x: this.cryptoImage1x,
+            image2x: this.cryptoImage2x,
+            name: this.cryptoName,
+            symbol: this.symbol,
+            price: this.cryptoPrice
+          };
+          //console.log(this.cryptox);
+          this.drawChart("A", 1440, 15);
+        });
+    }
+
   }
 
   drawChart(type: string, timelimit: number, aggregate: number): any {
