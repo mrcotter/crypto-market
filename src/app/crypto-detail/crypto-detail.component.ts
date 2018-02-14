@@ -60,6 +60,7 @@ export class CryptoDetailComponent implements OnInit {
 
     this.symbol = this._route.snapshot.paramMap.get('symbol').toUpperCase();
     //console.log( this.crypto == null );
+    // Check if input symbol is valid or not
     if (this._data.getNameSingle(this.symbol) == null) {
       this._router.navigate(['/404']);
     } else {
