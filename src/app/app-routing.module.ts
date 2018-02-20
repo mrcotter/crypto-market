@@ -7,7 +7,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
 const routes: Routes = [
   { path: '404', component: NotfoundComponent },
   { path: '', component: CryptoPriceComponent },
-  { path: ':symbol', component: CryptoDetailComponent }
+  { path: ':symbol', component: CryptoDetailComponent },
+  { path: '**', redirectTo: '/404' } 
 ];
 
 @NgModule({
