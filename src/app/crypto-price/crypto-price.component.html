@@ -13,7 +13,7 @@
 
     <div *ngIf="cryptos">
       <div id="crypto-table">
-        <nz-table #nzTable [nzDataSource]="cryptos" [nzIsPagination]="false">
+        <nz-table #nzTable [nzDataSource]="cryptos" [nzPageSize]="10">
           <thead nz-thead>
             <tr>
               <th nz-th class="col-1">

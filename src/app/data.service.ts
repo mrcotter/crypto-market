@@ -9,7 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class DataService {
 
   private result: any;
-  private coinlist: string = "BTC,ETH,XRP,BCH,ADA,LTC,NEO,XLM,EOS,XEM";
+  private coinlist: string = "BTC,ETH,XRP,BCH,LTC,ADA,NEO,XLM,EOS,DASH,IOT,XMR,XEM,ETC,TRX,VEN,LSK,QTUM,BTG,USDT";
   private priceMultiurl: string = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + this.coinlist + "&tsyms=USD";
 
   private symbolnameData: any = {
@@ -17,12 +17,22 @@ export class DataService {
     'ETH': 'Ethereum',
     'XRP': 'Ripple',
     'BCH': 'Bitcoin Cash',
-    'ADA': 'Cardano',
     'LTC': 'Litecoin',
+    'ADA': 'Cardano',
     'NEO': 'NEO',
     'XLM': 'Stellar',
     'EOS': 'EOS',
-    'XEM': 'NEM'
+    'DASH': 'Dash',
+    'IOT': 'IOTA',
+    'XMR': 'Monero',
+    'XEM': 'NEM',
+    'ETC': 'Eth Classic',
+    'TRX': 'TRON',
+    'VEN': 'VeChain',
+    'LSK': 'Lisk',
+    'QTUM': 'Qtum',
+    'BTG': 'Bitcoin Gold',
+    'USDT': 'Tether'
   };
 
   private urlPrefix: string = "http://p3k7sti9o.bkt.clouddn.com/";
