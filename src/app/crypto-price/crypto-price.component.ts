@@ -77,7 +77,7 @@ export class CryptoPriceComponent implements OnInit {
           this.cryptos = JSON.parse(JSON.stringify(Object.values(this.cryData)));
           
         }
-        //console.log(cryData);
+        //console.log(this.cryptos);
         this.setTimer();
       });
 
