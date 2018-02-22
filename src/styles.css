@@ -36,6 +36,16 @@ nz-tabs-nav {
     margin-bottom: 0 !important;
 }
 
+.ant-table-column-sorter-up, .ant-table-column-sorter-down {
+    line-height: 8px !important;
+    height: 8px !important;
+}
+
+:root .ant-table-column-sorter .anticon-caret-up,
+:root .ant-table-column-sorter .anticon-caret-down {
+    font-size: 13px !important;
+}
+
 @media all and (max-width: 479px) {
     .ant-tabs-tab {
         font-size: 12px !important;

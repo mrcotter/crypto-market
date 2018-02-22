@@ -26,27 +26,43 @@ export class CryptoPriceComponent implements OnInit {
   private subscription: Subscription;
   private timer: Observable<any>;
 
-  constructor(private _data: DataService) {
-    this.cryptoNames = this._data.getNamesFull();
-    this.cryptoImages1x = this._data.getImages1xFull();
-    this.cryptoImages2x = this._data.getImages2xFull();
-    this.cryptoLastPrices = [];
-    this.cryptoPriceCompare = [];
-    this.cryData = [];
+  private _sortValue = null;
+  private _loading = true;
+
+  constructor(private _data: DataService) { }
+
+  sort(value) {
+    this._sortValue = value;
+    //console.log(this._sortValue);
+    this.refreshData();
   }
 
   ngOnInit() {
+    this.refreshData();
+  }
+
+  refreshData() {
+    this._loading = true;
+    // Sort dataset before get
+    this._data.sortData(this._sortValue);
+
+    this.cryData = [];
+    this.cryptoLastPrices = [];
+    this.cryptoPriceCompare = [];
+    this.cryptoNames = this._data.getNamesFull();
+    this.cryptoImages1x = this._data.getImages1xFull();
+    this.cryptoImages2x = this._data.getImages2xFull();
 
     this._data.getPricesFull()
       .subscribe(res => {
         this.receiveData = res.DISPLAY;
+        //console.log(this.receiveData);
 
         let coinKeys: any = Object.keys(this.receiveData);
         let coinValues: any = Object.values(this.receiveData);
-        //console.log(this.cryptoLastPrices.length);
 
+        // Price compare first time check
         if (this.cryptoLastPrices.length === 0) {
-
           for (let _i = 0; _i < coinKeys.length; _i++) {
             this.cryptoLastPrices[_i] = parseFloat((coinValues[_i].USD.PRICE).substring(2).replace(/,/g, ''));
             this.cryptoPriceCompare[_i] = (parseFloat((coinValues[_i].USD.PRICE).substring(2).replace(/,/g, '')) -
@@ -61,7 +77,7 @@ export class CryptoPriceComponent implements OnInit {
         //console.log(this.cryptoLastPrices);
 
         for (let _i = 0; _i < coinKeys.length; _i++) {
-          this.cryData[ coinKeys[_i] ] = {
+          this.cryData[coinKeys[_i]] = {
             image1x: this.cryptoImages1x[_i],
             image2x: this.cryptoImages2x[_i],
             name: this.cryptoNames[_i],
@@ -75,12 +91,12 @@ export class CryptoPriceComponent implements OnInit {
 
           this.cryptoLastPrices[_i] = parseFloat((coinValues[_i].USD.PRICE).substring(2).replace(/,/g, ''));
           this.cryptos = JSON.parse(JSON.stringify(Object.values(this.cryData)));
-          
+
         }
         //console.log(this.cryptos);
+        this._loading = false;
         this.setTimer();
       });
-
   }
 
   setTimer() {

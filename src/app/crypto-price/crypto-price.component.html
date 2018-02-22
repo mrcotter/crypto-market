@@ -13,11 +13,12 @@
 
     <div *ngIf="cryptos">
       <div id="crypto-table">
-        <nz-table #nzTable [nzDataSource]="cryptos" [nzIsPagination]="false">
+        <nz-table #nzTable [nzAjaxData]="cryptos" [nzLoading]="_loading" [nzIsPagination]="false">
           <thead nz-thead>
             <tr>
               <th nz-th class="col-1">
                 <span>Name</span>
+                <nz-table-sort (nzValueChange)="sort($event)"></nz-table-sort>
               </th>
               <th nz-th class="col-2">
                 <span>Symbol</span>

@@ -9,92 +9,118 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class DataService {
 
   private result: any;
-  private coinlist: string = "BTC,ETH,XRP,BCH,LTC,ADA,NEO,XLM,EOS,DASH,IOT,XMR,XEM,ETC,TRX,VEN,LSK,QTUM,BTG,USDT";
-  private priceMultiurl: string = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + this.coinlist + "&tsyms=USD";
-
   private symbolnameData: any = {
-    'BTC': 'Bitcoin',
-    'ETH': 'Ethereum',
-    'XRP': 'Ripple',
-    'BCH': 'Bitcoin Cash',
-    'LTC': 'Litecoin',
-    'ADA': 'Cardano',
+    'Bitcoin': 'BTC',
+    'Ethereum': 'ETH',
+    'Ripple': 'XRP',
+    'Bitcoin Cash': 'BCH',
+    'Litecoin': 'LTC',
+    'Cardano': 'ADA',
     'NEO': 'NEO',
-    'XLM': 'Stellar',
+    'Stellar': 'XLM',
     'EOS': 'EOS',
-    'DASH': 'Dash',
-    'IOT': 'IOTA',
-    'XMR': 'Monero',
-    'XEM': 'NEM',
-    'ETC': 'Eth Classic',
-    'TRX': 'TRON',
-    'VEN': 'VeChain',
-    'LSK': 'Lisk',
-    'QTUM': 'Qtum',
-    'BTG': 'Bitcoin Gold',
-    'USDT': 'Tether'
+    'Dash': 'DASH',
+    'IOTA': 'IOT',
+    'Monero': 'XMR',
+    'NEM': 'XEM',
+    'Eth Classic': 'ETC',
+    'TRON': 'TRX',
+    'VeChain': 'VEN',
+    'Lisk': 'LSK',
+    'Qtum': 'QTUM',
+    'Bitcoin Gold': 'BTG',
+    'Tether': 'USDT'
   };
+  private defaultDataCopy: any = { ...this.symbolnameData };
 
-  private urlPrefix: string = "http://p3k7sti9o.bkt.clouddn.com/";
-  private urlSuffix: string[] = this.coinlist.toLowerCase().split(',');
-  private images1x: any[] = [];
-  private images2x: any[] = [];
+  private priceMultiurl: string;
+  private imageurlPrefix: string = "http://p3k7sti9o.bkt.clouddn.com/";
+  private imageurlSuffix: string[];
+  private images1x: any[];
+  private images2x: any[];
 
-  constructor(private _http: HttpClient) {
-    for (let _i = 0; _i < this.urlSuffix.length; _i++) {
-      this.images1x.push(this.urlPrefix + this.urlSuffix[_i] + ".png");
-      this.images2x.push(this.urlPrefix + this.urlSuffix[_i] + "@2x.png");
-      //console.log(this.images2x[_i]);
-    }
-  }
+  private timer = Observable.timer(0, 15000);
 
-  // Fetch price data every 10 seconds
+  constructor(private _http: HttpClient) { }
+
+  // Fetch price data every 15 seconds
   getPricesFull(): Observable<any> {
-    // modify back to 10000
-    return Observable.interval(10000).startWith(0)
-      .mergeMapTo(this._http.get(this.priceMultiurl))
-      .map(result => this.result = result)
+    let coinlist: string[] = Object.values(this.symbolnameData);
+    //console.log(orderedData);
+    this.priceMultiurl = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + coinlist.join() + "&tsyms=USD";
+
+    // interval is set to 15000(15s)
+    return this.timer
+      .flatMap(result => this.result = this._http.get(this.priceMultiurl))
       .pipe(catchError(this.handleError('getPricesFull', [])));
   }
 
   // Fetch single price data
   getPriceSingle(symbol: string): Observable<any> {
     return this._http.get("https://min-api.cryptocompare.com/data/price?fsym=" + symbol + "&tsyms=USD")
-    .map(result => this.result = result)
-    .pipe(catchError(this.handleError('getPriceSingle', [])));
+      .map(result => this.result = result)
+      .pipe(catchError(this.handleError('getPriceSingle', [])));
   }
 
   getNamesFull(): string[] {
-    //console.log(Object.values(this.symbolnameData));
-    return Object.values(this.symbolnameData);
+    //console.log(Object.keys(this.sortData(this.symbolnameData, sortOrder)));
+    return Object.keys(this.symbolnameData);
   }
 
   getNameSingle(symbol: string): string {
-    return this.symbolnameData[symbol];
+    return Object.keys(this.symbolnameData).find(key => this.symbolnameData[key] === symbol);
   }
 
   getImages1xFull(): any[] {
+    let coinlist: string[] = Object.values(this.symbolnameData);
+    this.images1x = [];
+
+    this.imageurlSuffix = coinlist.map(res => res.toLowerCase());
+    for (let symbol of this.imageurlSuffix) {
+      this.images1x.push(this.imageurlPrefix + symbol + ".png");
+    }
+
     return this.images1x;
   }
 
   getImage1xSingle(symbol: string): string {
-    return this.urlPrefix + symbol.toLowerCase() + ".png"
+    return this.imageurlPrefix + symbol.toLowerCase() + ".png"
   }
 
   getImages2xFull(): any[] {
+    let coinlist: string[] = Object.values(this.symbolnameData);
+    this.images2x = [];
+
+    this.imageurlSuffix = coinlist.map(res => res.toLowerCase());
+    for (let symbol of this.imageurlSuffix) {
+      this.images2x.push(this.imageurlPrefix + symbol + "@2x.png");
+    }
+
     return this.images2x;
   }
 
   getImage2xSingle(symbol: string): string {
-    return this.urlPrefix + symbol.toLowerCase() + "@2x.png"
+    return this.imageurlPrefix + symbol.toLowerCase() + "@2x.png"
   }
 
   // Fetch minute/hourly/daily price of historical data
   getHitoricalPrices(symbol: string, prefix: string, timelimit: number, aggregate: number): Observable<any> {
-    // console.log(this._http.get("https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + `${symbol}` + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate));
+    //console.log(this._http.get("https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + `${symbol}` + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate));
     return this._http.get("https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + `${symbol}` + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate)
       .map(result => this.result = result)
       .pipe(catchError(this.handleError(`getHitoricalPrices symbol=${symbol}`)));
+  }
+
+  sortData(sortOrder: string) {
+    if (sortOrder === "ascend") {
+      this.symbolnameData = Object.keys(this.symbolnameData).sort().reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
+    } else if (sortOrder === "descend") {
+      this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => 0 - (a > b ? 1 : -1))
+        .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
+    } else {
+      this.symbolnameData = this.defaultDataCopy;
+    }
+    //console.log(this.symbolnameData);
   }
 
   /**

@@ -90,7 +90,6 @@ export class CryptoDetailComponent implements OnInit {
 
   drawChart(type: string, timelimit: number, aggregate: number): any {
     // console.log(this.selectedIndex);
-
     if (this.chart != null) {
       this.chart.destroy();
     }
@@ -121,6 +120,7 @@ export class CryptoDetailComponent implements OnInit {
       }
     });
 
+    // Chart params for diffrent types
     let priceChart: any, alldates: any, cryptoDates: any[];
     let prefix: string;
     let canvasID: string;
