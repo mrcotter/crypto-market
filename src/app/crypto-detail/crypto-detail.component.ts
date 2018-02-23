@@ -183,6 +183,12 @@ export class CryptoDetailComponent implements OnInit {
   }
 
   goBack(): void {
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'Links and Buttons',
+      eventLabel: 'Go Back',
+      eventAction: 'click',
+      eventValue: 30
+    });
     this._location.back();
   }
 

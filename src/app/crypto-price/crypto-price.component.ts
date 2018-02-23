@@ -110,4 +110,13 @@ export class CryptoPriceComponent implements OnInit {
     });
   }
 
+  sendEvent = () => {
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'Links and Buttons',
+      eventLabel: 'CoinlistToDetail',
+      eventAction: 'click',
+      eventValue: 20
+    });
+  }
+
 }

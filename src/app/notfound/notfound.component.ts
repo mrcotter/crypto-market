@@ -9,7 +9,15 @@ export class NotfoundComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  sendEvent = () => {
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'Links and Buttons',
+      eventLabel: '404backtohome',
+      eventAction: 'click',
+      eventValue: 10
+    });
   }
 
 }
