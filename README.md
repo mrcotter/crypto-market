@@ -1,4 +1,4 @@
-# CryptoMarket
+# Cryptocurrency Market
 
 This is a simple web application of real-time cryptocurrency price tracker based on Angular 5. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
 
