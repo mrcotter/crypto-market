@@ -1,6 +1,16 @@
 # CryptoMarket
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
+This is a simple web application of real-time cryptocurrency price tracker based on Angular 5. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
+
+Visit: [crypto.kris2d.info](http://crypto.kris2d.info/)
+
+## Features
+
+* Pure front end coding, no back end services;
+* Fetch real-time price data from [CryptoCompare's public APIs](https://www.cryptocompare.com/api/) every 15 seconds;
+* Draw historical price trends using [Chart.js](http://www.chartjs.org/) with customised styles and functions;
+* Integrated with [Ant Design](https://ng.ant.design/) for simple and unified visual style.
+* Cross-browser compatability and mobile-friendly.
 
 ## Development server
 
