@@ -1,6 +1,6 @@
 # [Cryptocurrency Market](http://crypto.kris2d.info/)
 
-This is a simple web application of real-time cryptocurrency price tracker based on Angular 5. This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
+This is a simple web application of real-time cryptocurrency price tracker based on Angular 5.
 
 ## Environment
 
