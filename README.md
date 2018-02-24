@@ -1,8 +1,13 @@
-# Cryptocurrency Market
+# [Cryptocurrency Market](http://crypto.kris2d.info/)
 
-This is a simple web application of real-time cryptocurrency price tracker based on Angular 5. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
+This is a simple web application of real-time cryptocurrency price tracker based on Angular 5. This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
-Visit: [crypto.kris2d.info](http://crypto.kris2d.info/)
+## Environment
+
+* [Angular 5.2.6](https://angular.io/)
+* [Angular-Cli 1.7.1](https://github.com/angular/angular-cli)
+* [NG-ZORRO 0.6.14](https://ng.ant.design/#/docs/angular/introduce)
+* [Chart.js 2.7.1](https://nginx.org/en/)
 
 ## Features
 
@@ -11,6 +16,12 @@ Visit: [crypto.kris2d.info](http://crypto.kris2d.info/)
 * Draw historical price trends using [Chart.js](http://www.chartjs.org/) with customised styles and functions;
 * Integrated with [Ant Design](https://ng.ant.design/) for simple and unified visual style.
 * Cross-browser compatability and mobile-friendly.
+
+![Crypto Market](http://ou3jvlx7k.bkt.clouddn.com/crypto_git01.png)
+
+![Crypto Market](http://ou3jvlx7k.bkt.clouddn.com/crypto_git02.png)
+
+![Crypto Market](http://ou3jvlx7k.bkt.clouddn.com/crypto_git03.jpg)
 
 ## Development server
 
