@@ -2,6 +2,7 @@
     margin: 2em auto 2em auto;
     width: 80%;
     max-width: 970px;
+    max-height: 90px;
 }
 
 @media all and (max-width: 640px) {
