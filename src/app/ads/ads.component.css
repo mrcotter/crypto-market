@@ -1,25 +1,28 @@
 #ads-content {
     margin: 2em auto 2em auto;
-    width: 80%;
-    max-width: 970px;
-}
-@media all and (max-width: 640px) {
-    #ads-content {
-        width: 95%;
-    }
+    width: 320px;
 }
 
 .ads-responsive {
     width: 320px;
     height: 50px;
 }
+
 @media (min-width: 500px) {
+    #ads-content {
+        width: 468px;
+    }
+
     .ads-responsive {
         width: 468px;
         height: 60px;
     }
 }
 @media (min-width: 800px) {
+    #ads-content {
+        width: 728px;
+    }
+
     .ads-responsive {
         width: 728px;
         height: 90px;
