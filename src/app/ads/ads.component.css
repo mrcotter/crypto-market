@@ -1,0 +1,11 @@
+#ads-content {
+    margin: 2em auto 2em auto;
+    width: 80%;
+    max-width: 970px;
+}
+
+@media all and (max-width: 640px) {
+    #ads-content {
+        width: 95%;
+    }
+}

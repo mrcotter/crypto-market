@@ -13,6 +13,7 @@ import { CryptoPriceComponent } from './crypto-price/crypto-price.component';
 import { CryptoDetailComponent } from './crypto-detail/crypto-detail.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { AdsComponent } from './ads/ads.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
     AppComponent,
     CryptoPriceComponent,
     CryptoDetailComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    AdsComponent
   ],
   imports: [
     BrowserModule,

@@ -22,7 +22,6 @@
     <nz-content>
 
       <div nz-row id="canvas-content">
-
         <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
           <nz-tabset [(nzSelectedIndex)]="selectedIndex" (nzSelectChange)="selectChange()">
             <nz-tab *ngFor="let tab of tabs">
@@ -36,6 +35,8 @@
           </nz-tabset>
         </div>
       </div>
+
+      <app-ads></app-ads>
 
     </nz-content>
 
