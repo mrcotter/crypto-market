@@ -4,10 +4,10 @@ This is a simple web application of real-time cryptocurrency price tracker based
 
 ## Environment
 
-* [Angular 5.2.6](https://angular.io/)
-* [Angular-Cli 1.7.1](https://github.com/angular/angular-cli)
-* [NG-ZORRO 0.6.14](https://ng.ant.design/#/docs/angular/introduce)
-* [Chart.js 2.7.1](https://nginx.org/en/)
+[![Angular 5.2.6](https://img.shields.io/badge/Angular-5.2.6-brightgreen.svg)](https://angular.io/)
+[![Angular-Cli 1.7.1](https://img.shields.io/badge/AngularCLI-1.7.1-brightgreen.svg)](https://github.com/angular/angular-cli)
+[![NG-ZORRO 0.6.14](https://img.shields.io/badge/NGZORRO-0.6.14-brightgreen.svg)](https://ng.ant.design/#/docs/angular/introduce)
+[![Chart.js 2.7.1](https://img.shields.io/badge/Chart.js-2.7.1-brightgreen.svg)](http://www.chartjs.org/)
 
 ## Features
 
@@ -17,11 +17,11 @@ This is a simple web application of real-time cryptocurrency price tracker based
 * Integrated with [Ant Design](https://ng.ant.design/) for simple and unified visual style.
 * Cross-browser compatability and mobile-friendly.
 
-![Crypto Market](http://ou3jvlx7k.bkt.clouddn.com/crypto_git01.png)
+![Cryptocurrency Market](http://ou3jvlx7k.bkt.clouddn.com/crypto01.png)
 
-![Crypto Market](http://ou3jvlx7k.bkt.clouddn.com/crypto_git02.png)
+![Cryptocurrency Market](http://ou3jvlx7k.bkt.clouddn.com/crypto02.png)
 
-![Crypto Market](http://ou3jvlx7k.bkt.clouddn.com/crypto_git03.jpg)
+![Cryptocurrency Market](http://ou3jvlx7k.bkt.clouddn.com/crypto03.jpg)
 
 ## Development server
 
