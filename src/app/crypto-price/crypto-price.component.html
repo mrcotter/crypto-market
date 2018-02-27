@@ -19,10 +19,11 @@
             <tr>
               <th nz-th class="col-1">
                 <span>Name</span>
-                <nz-table-sort (nzValueChange)="sort($event)"></nz-table-sort>
+                <nz-table-sort (nzValueChange)="sort('name', $event)"></nz-table-sort>
               </th>
               <th nz-th class="col-2">
                 <span>Symbol</span>
+                <nz-table-sort (nzValueChange)="sort('symbol', $event)"></nz-table-sort>
               </th>
               <th nz-th class="col-3">
                 <span>Price (USD)</span>

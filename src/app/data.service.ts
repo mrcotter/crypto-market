@@ -111,24 +111,48 @@ export class DataService {
       .pipe(catchError(this.handleError(`getHitoricalPrices symbol=${symbol}`)));
   }
 
-  sortData(sortOrder: string) {
-    if (sortOrder === "ascend") {
-      this.symbolnameData = Object.keys(this.symbolnameData).sort().reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
-    } else if (sortOrder === "descend") {
-      this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => 0 - (a > b ? 1 : -1))
-        .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
-    } else {
-      this.symbolnameData = this.defaultDataCopy;
+  sortData(sortName: string, sortOrder: string) {
+    switch (sortName) {
+
+      case "name": {
+        if (sortOrder === "ascend") {
+          this.symbolnameData = Object.keys(this.symbolnameData).sort().reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
+        } else if (sortOrder === "descend") {
+          this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => b.localeCompare(a))
+            .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
+        } else {
+          this.symbolnameData = this.defaultDataCopy;
+        }
+        //console.log(this.symbolnameData);
+        break;
+      }
+
+      case "symbol": {
+        if (sortOrder === "ascend") {
+          this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => this.symbolnameData[a].localeCompare(this.symbolnameData[b]))
+            .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
+          // console.log(this.symbolnameData);
+        } else if (sortOrder === "descend") {
+          this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => this.symbolnameData[b].localeCompare(this.symbolnameData[a]))
+            .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
+        } else {
+          this.symbolnameData = this.defaultDataCopy;
+        }
+        //console.log(this.symbolnameData);
+        break;
+      }
+
     }
+
     //console.log(this.symbolnameData);
   }
 
   /**
- * Handle Http operation that failed.
- * Let the app continue.
- * @param operation - name of the operation that failed
- * @param result - optional value to return as the observable result
- */
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

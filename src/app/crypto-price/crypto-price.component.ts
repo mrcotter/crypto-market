@@ -27,12 +27,14 @@ export class CryptoPriceComponent implements OnInit {
   private timer: Observable<any>;
 
   private _sortValue = null;
+  private _sortName = null;
   private _loading = true;
 
   constructor(private _data: DataService) { }
 
-  sort(value) {
-    this._sortValue = value;
+  sort(sortName: string, sortEvent: string) {
+    this._sortValue = sortEvent;
+    this._sortName = sortName;
     //console.log(this._sortValue);
     this.refreshData();
   }
@@ -44,7 +46,7 @@ export class CryptoPriceComponent implements OnInit {
   refreshData() {
     this._loading = true;
     // Sort dataset before get
-    this._data.sortData(this._sortValue);
+    this._data.sortData(this._sortName, this._sortValue);
 
     this.cryData = [];
     this.cryptoLastPrices = [];
