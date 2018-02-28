@@ -17,11 +17,11 @@ This is a simple web application of real-time cryptocurrency price tracker based
 * Integrated with [Ant Design](https://ng.ant.design/) for simple and unified visual style.
 * Cross-browser compatability and mobile-friendly.
 
-![Cryptocurrency Market](http://ou3jvlx7k.bkt.clouddn.com/crypto01.png)
+![Cryptocurrency Market](https://user-images.githubusercontent.com/5259084/36769625-8ea94e84-1c99-11e8-8bb6-4c2e5a8be43f.png)
 
-![Cryptocurrency Market](http://ou3jvlx7k.bkt.clouddn.com/crypto02.png)
+![Cryptocurrency Market](https://user-images.githubusercontent.com/5259084/36769628-9364c48a-1c99-11e8-8355-78b2d842afa0.png)
 
-![Cryptocurrency Market](http://ou3jvlx7k.bkt.clouddn.com/crypto03.jpg)
+![Cryptocurrency Market](https://user-images.githubusercontent.com/5259084/36769631-9557d5de-1c99-11e8-8a8d-7f362244665c.jpg)
 
 ## Development server
 

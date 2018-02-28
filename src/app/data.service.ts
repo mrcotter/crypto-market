@@ -34,7 +34,7 @@ export class DataService {
   private defaultDataCopy: any = { ...this.symbolnameData };
 
   private priceMultiurl: string;
-  private imageurlPrefix: string = "http://p3k7sti9o.bkt.clouddn.com/";
+  private imageurlPrefix: string = "./assets/crypto-icons/";
   private imageurlSuffix: string[];
   private images1x: any[];
   private images2x: any[];

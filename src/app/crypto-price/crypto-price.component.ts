@@ -29,6 +29,10 @@ export class CryptoPriceComponent implements OnInit {
   private _sortValue = null;
   private _sortName = null;
   private _loading = true;
+  private _sortMap = {
+    name   : null,
+    symbol : null
+  };
 
   constructor(private _data: DataService) { }
 
@@ -36,6 +40,13 @@ export class CryptoPriceComponent implements OnInit {
     this._sortValue = sortEvent;
     this._sortName = sortName;
     //console.log(this._sortValue);
+    Object.keys(this._sortMap).forEach(key => {
+      if ( key !== sortName ) {
+        this._sortMap[key] = null;
+      } else {
+        this._sortMap[key] = sortEvent;
+      }
+    });
     this.refreshData();
   }
 
