@@ -25,7 +25,7 @@ script:
   - ng build --prod --build-optimizer
 
 after_success:
-  rsync -az --delete --rsh=ssh dist/ ${host_user}@${host_ip}:/var/www/crypto.kris2d.info/dist
+  - rsync -az --delete --rsh=ssh dist/ ${host_user}@${host_ip}:/var/www/crypto.kris2d.info/dist
 
 
 
