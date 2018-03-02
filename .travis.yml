@@ -23,4 +23,4 @@ script:
   - ng build --prod --build-optimizer
 
 after_success:
-  - rsync -az --delete -e 'ssh -p 22' dist/ ${host_user}@${host_ip}:/var/www/crypto.kris2d.info/dist
+  - rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" dist/ ${host_user}@${host_ip}:/var/www/crypto.kris2d.info/dist
