@@ -4,6 +4,7 @@ This is a simple web application of real-time cryptocurrency price tracker based
 
 ## Environment
 
+[![Build Status](https://travis-ci.org/mrcotter/crypto-market.svg?branch=master)](https://travis-ci.org/mrcotter/crypto-market)
 [![Angular 5.2.6](https://img.shields.io/badge/Angular-5.2.6-brightgreen.svg)](https://angular.io/)
 [![Angular-Cli 1.7.1](https://img.shields.io/badge/AngularCLI-1.7.1-brightgreen.svg)](https://github.com/angular/angular-cli)
 [![NG-ZORRO 0.6.14](https://img.shields.io/badge/NGZORRO-0.6.14-brightgreen.svg)](https://ng.ant.design/#/docs/angular/introduce)
@@ -13,6 +14,7 @@ This is a simple web application of real-time cryptocurrency price tracker based
 
 * Pure front end coding, no back end services;
 * Fetch real-time price data from [CryptoCompare's public APIs](https://www.cryptocompare.com/api/) every 15 seconds;
+* Colour changes to indicate real-time price change;
 * Draw historical price trends using [Chart.js](http://www.chartjs.org/) with customised styles and functions;
 * Integrated with [Ant Design](https://ng.ant.design/) for simple and unified visual style.
 * Cross-browser compatability and mobile-friendly.
