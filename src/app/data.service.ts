@@ -9,6 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class DataService {
 
   private result: any;
+  // Currently 60 coins in data list
   private symbolnameData: any = {
     'Bitcoin': 'BTC',
     'Ethereum': 'ETH',

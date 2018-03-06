@@ -25,6 +25,7 @@
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.4.1",
     "ng-zorro-antd": "^0.6.15",
+    "ng2-search-filter": "^0.4.7",
     "rxjs": "^5.5.6",
     "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.19"

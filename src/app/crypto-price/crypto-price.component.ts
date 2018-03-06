@@ -132,6 +132,10 @@ export class CryptoPriceComponent implements OnInit {
     });
   }
 
+  onSearch(event: string): void {
+    console.log(event);
+  }
+
   sendEvent = () => {
     (<any>window).ga('send', 'event', {
       eventCategory: 'Links and Buttons',

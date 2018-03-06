@@ -1,11 +1,19 @@
 <nz-layout>
   <nz-header class="clearfix" id="header">
     <div nz-row>
-      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
+      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="12">
         <a routerLink="" id="logo">
           <span>CRYPTOCURRENCY
             <br class="full-width-breakpoint" /> MARKET</span>
         </a>
+      </div>
+      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="6">
+        <nz-input [nzType]="'search'" [(ngModel)]="_searchText" [nzPlaceHolder]="'Search Coins'" (nzOnSearch)="onSearch($event)"></nz-input>
+        <ul>
+          <li *ngFor="let crypto of cryptos | filter:_searchText">
+            {{crypto.name}}: {{crypto.symbol}}
+          </li>
+        </ul>
       </div>
     </div>
   </nz-header>

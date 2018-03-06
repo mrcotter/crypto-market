@@ -40,6 +40,7 @@
 .ant-table-tbody > tr > td {
     padding-top: 12px !important;
     padding-bottom: 12px !important;
+    cursor: pointer;
 }
 
 .table-operations {
@@ -58,7 +59,6 @@
 
 .crypto-name {
     font-weight: bold;
-    cursor: pointer;
 }
 
 .crypto-price, .crypto-market-cap,
