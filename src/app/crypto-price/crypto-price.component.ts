@@ -29,6 +29,10 @@ export class CryptoPriceComponent implements OnInit {
   private _sortValue = null;
   private _sortName = null;
   private _loading = true;
+  private _current = 1;
+  private _index = 1;
+  private _changeIndex = false;
+  private _pageSize = 10;
   private _sortMap = {
     name   : null,
     symbol : null
@@ -54,7 +58,12 @@ export class CryptoPriceComponent implements OnInit {
     this.refreshData();
   }
 
-  refreshData() {
+  refreshData(reset:boolean = false) {
+    if (reset) {
+      this._current = 1;
+    }
+
+    this._changeIndex = false;
     this._loading = true;
     // Sort dataset before get
     this._data.sortData(this._sortName, this._sortValue);
@@ -106,7 +115,7 @@ export class CryptoPriceComponent implements OnInit {
           this.cryptos = JSON.parse(JSON.stringify(Object.values(this.cryData)));
 
         }
-        //console.log(this.cryptos);
+        //console.log(this._current);
         this._loading = false;
         this.setTimer();
       });

@@ -14,7 +14,14 @@
 
     <div *ngIf="cryptos">
       <div id="crypto-table">
-        <nz-table #nzTable [nzAjaxData]="cryptos" [nzLoading]="_loading" [nzIsPagination]="false">
+        <nz-table #nzTable
+          [nzDataSource]="cryptos"
+          [nzLoading]="_loading"
+          [(nzPageSize)]="_pageSize"
+          [(nzPageIndex)]="_current"
+          (nzPageSizeChange)="refreshData(true)"
+          [nzShowSizeChanger]="true"
+          [(nzIsPageIndexReset)]="_changeIndex">
           <thead nz-thead>
             <tr>
               <th nz-th class="col-1">

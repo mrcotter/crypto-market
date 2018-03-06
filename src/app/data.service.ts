@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/observable/of';
@@ -18,18 +18,28 @@ export class DataService {
     'Cardano': 'ADA',
     'NEO': 'NEO',
     'Stellar': 'XLM',
-    'EOS': 'EOS',
-    'Dash': 'DASH',
-    'IOTA': 'IOT',
     'Monero': 'XMR',
+    'EOS': 'EOS',
+    'IOTA': 'IOT',
+    'Dash': 'DASH',
     'NEM': 'XEM',
-    'Eth Classic': 'ETC',
     'TRON': 'TRX',
+    'Eth Classic': 'ETC',
+    'Tether': 'USDT',
     'VeChain': 'VEN',
-    'Lisk': 'LSK',
     'Qtum': 'QTUM',
+    'Nano': 'NANO',
+    'Lisk': 'LSK',
     'Bitcoin Gold': 'BTG',
-    'Tether': 'USDT'
+    'OmiseGO': 'OMG',
+    'ICON': 'ICX',
+    'Zcash': 'ZEC',
+    'Binance Coin': 'BNB',
+    'DigixDAO': 'USDT',
+    'Steem': 'STEEM',
+    'Stratis': 'STRAT',
+    'Verge': 'XVG',
+    'Populous': 'PPT'
   };
   private defaultDataCopy: any = { ...this.symbolnameData };
 
@@ -51,8 +61,8 @@ export class DataService {
 
     // interval is set to 15000(15s)
     return this.timer
-      .flatMap(result => this.result = this._http.get(this.priceMultiurl))
-      .pipe(catchError(this.handleError('getPricesFull', [])));
+      .flatMap(result => this.result = this._http.get(this.priceMultiurl)
+      .pipe(catchError(this.handleError('getPricesFull', []))));
   }
 
   // Fetch single price data
