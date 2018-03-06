@@ -32,7 +32,7 @@ export class CryptoPriceComponent implements OnInit {
   private _current = 1;
   private _index = 1;
   private _changeIndex = false;
-  private _pageSize = 10;
+  private _pageSize = 20;
   private _sortMap = {
     name   : null,
     symbol : null
@@ -59,11 +59,11 @@ export class CryptoPriceComponent implements OnInit {
   }
 
   refreshData(reset:boolean = false) {
+    // When page size changed, reset index to 1
     if (reset) {
       this._current = 1;
     }
 
-    this._changeIndex = false;
     this._loading = true;
     // Sort dataset before get
     this._data.sortData(this._sortName, this._sortValue);

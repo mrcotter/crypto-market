@@ -28,18 +28,48 @@ export class DataService {
     'Tether': 'USDT',
     'VeChain': 'VEN',
     'Qtum': 'QTUM',
-    'Nano': 'NANO',
+    'Nano': 'XRB',
     'Lisk': 'LSK',
     'Bitcoin Gold': 'BTG',
-    'OmiseGO': 'OMG',
+    'OmiseGo': 'OMG',
     'ICON': 'ICX',
     'Zcash': 'ZEC',
+    'Digix DAO': 'DGD',
     'Binance Coin': 'BNB',
-    'DigixDAO': 'USDT',
     'Steem': 'STEEM',
-    'Stratis': 'STRAT',
     'Verge': 'XVG',
-    'Populous': 'PPT'
+    'Stratis': 'STRAT',
+    'Populous': 'PPT',
+    'ByteCoin': 'BTE',
+    'Waves': 'WAVES',
+    'Siacoin': 'SC',
+    'Status': 'SNT',
+    'RChain': 'RHOC',
+    'Maker': 'MKR',
+    'DogeCoin': 'DOGE',
+    'Bitshares': 'BTS',
+    'Decred': 'DCR',
+    'Aeternity': 'AE',
+    'Waltonchain': 'WTC',
+    'Augur': 'REP',
+    'Electroneum': 'ETN',
+    '0x': 'ZRX',
+    'Komodo': 'KMD',
+    'Bytom': 'BTM',
+    'ARK': 'ARK',
+    'Veritaseum': 'VERI',
+    'Ardor': 'ARDR',
+    'Golem': 'GNT',
+    'Dragonchain': 'DRGN',
+    'Hshare': 'HSR',
+    'BAT': 'BAT',
+    'Cryptonex': 'CNX',
+    'SysCoin': 'SYS',
+    'Zilliqa': 'ZIL',
+    'KuCoin': 'KCS',
+    'DigiByte': 'DGB',
+    'Ethos': 'BQX',
+    'Gas': 'GAS'
   };
   private defaultDataCopy: any = { ...this.symbolnameData };
 
@@ -72,15 +102,18 @@ export class DataService {
       .pipe(catchError(this.handleError('getPriceSingle', [])));
   }
 
+  // Return all coin names as arrays
   getNamesFull(): string[] {
     //console.log(Object.keys(this.sortData(this.symbolnameData, sortOrder)));
     return Object.keys(this.symbolnameData);
   }
 
+  // Return coin name by symbol
   getNameSingle(symbol: string): string {
     return Object.keys(this.symbolnameData).find(key => this.symbolnameData[key] === symbol);
   }
 
+  // Get all @1x img path
   getImages1xFull(): any[] {
     let coinlist: string[] = Object.values(this.symbolnameData);
     this.images1x = [];
@@ -93,10 +126,12 @@ export class DataService {
     return this.images1x;
   }
 
+  // Get single @1x img path
   getImage1xSingle(symbol: string): string {
     return this.imageurlPrefix + symbol.toLowerCase() + ".png"
   }
 
+  // Get all @2x img paths
   getImages2xFull(): any[] {
     let coinlist: string[] = Object.values(this.symbolnameData);
     this.images2x = [];
@@ -109,6 +144,7 @@ export class DataService {
     return this.images2x;
   }
 
+  // Get single @2x img path
   getImage2xSingle(symbol: string): string {
     return this.imageurlPrefix + symbol.toLowerCase() + "@2x.png"
   }
@@ -121,6 +157,7 @@ export class DataService {
       .pipe(catchError(this.handleError(`getHitoricalPrices symbol=${symbol}`)));
   }
 
+  // Sort data by coin name or coin symbol
   sortData(sortName: string, sortOrder: string) {
     switch (sortName) {
 
@@ -153,7 +190,6 @@ export class DataService {
       }
 
     }
-
     //console.log(this.symbolnameData);
   }
 
