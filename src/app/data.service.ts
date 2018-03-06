@@ -40,7 +40,7 @@ export class DataService {
     'Verge': 'XVG',
     'Stratis': 'STRAT',
     'Populous': 'PPT',
-    'ByteCoin': 'BTE',
+    'ByteCoin': 'BCN',
     'Waves': 'WAVES',
     'Siacoin': 'SC',
     'Status': 'SNT',
