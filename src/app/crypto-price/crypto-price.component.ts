@@ -40,6 +40,8 @@ export class CryptoPriceComponent implements OnInit {
     symbol : null
   };
 
+  private input_id: string = "";
+
   constructor(
     private _data: DataService,
     private _message: NzMessageService
@@ -147,6 +149,14 @@ export class CryptoPriceComponent implements OnInit {
       // set showloader to false to hide colored div from view after 1.5 seconds
       this.showloader = false;
     });
+  }
+
+  addId() {
+    this.input_id = "focusWidth";
+  }
+
+  removeId() {
+    this.input_id = "";
   }
 
   sendEvent = () => {

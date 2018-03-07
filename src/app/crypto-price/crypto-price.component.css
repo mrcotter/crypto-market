@@ -1,9 +1,10 @@
 #header {
     -webkit-transition: opacity .5s;
     transition: opacity .5s;
-    height: 80px;
+    height: 110px;
     margin: 0 auto 18px auto;
     padding-left: 1.1em;
+    padding-right: 1.1em;
     width: 80%;
 }
 
@@ -21,6 +22,12 @@
     letter-spacing: .1em;
     line-height: 100px;
     color: #108ee9;
+}
+
+.search-col nz-input {
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    transition: all .5s ease;
 }
 
 #footer {
@@ -86,6 +93,37 @@
     color: #ff6060;
 }
 
+#focusWidth {
+    width: 220px !important;
+}
+
+@media all and (min-width: 1200px) {
+    #header {
+        height: 80px;
+    }
+
+    .search-col nz-input {
+        line-height: 112px;
+        width: 128px;
+        float: right;
+    }
+
+}
+
+@media all and (max-width: 1199px) {
+    .search-col {
+        margin-top: -12px;
+    }
+
+    .search-col nz-input {
+        width: 180px;
+    }
+
+    #focusWidth {
+        width: 260px !important;
+    }
+}
+
 @media all and (min-width: 600px) and (max-width: 800px) {
     #logo span {
         font-size: 1.8em;
@@ -107,6 +145,7 @@
         display:none;
         line-height:0;  
     }
+
 }
 
 @media all and (min-width: 480px) and (max-width: 599px) {
@@ -121,10 +160,6 @@
     }
 }
 
-@media all and (min-width: 360px) and (max-width: 479px) {
-
-}
-
 @media all and (max-width: 479px) {
     #logo span {
         font-size: 1.4em;
@@ -137,7 +172,19 @@
     }
 
     #header {
-        height: 100px;
+        height: 128px;
+    }
+
+    .search-col {
+        margin-top: -30px;
+    }
+
+    .search-col nz-input {
+        width: 140px;
+    }
+
+    #focusWidth {
+        width: 200px !important;
     }
 }
 

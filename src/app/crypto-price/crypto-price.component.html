@@ -7,8 +7,10 @@
             <br class="full-width-breakpoint" /> MARKET</span>
         </a>
       </div>
-      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="6">
-        <nz-input [nzType]="'search'" [(ngModel)]="_searchText" [nzPlaceHolder]="'Search Coins'" [nzSize]="'large'" (nzOnSearch)="onSearch($event)"></nz-input>
+      <div nz-col [nzXs]="12" [nzSm]="12" [nzMd]=8 [nzLg]="{ span: 6, offset: 6 }" class="search-col">
+        <nz-input [nzType]="'search'" [(ngModel)]="_searchText" (nzFocus)="addId()" (nzBlur)="removeId()" [nzPlaceHolder]="'Search Coins'"
+          [nzSize]="'large'" (nzOnSearch)="onSearch($event)" id="{{input_id}}">
+        </nz-input>
       </div>
     </div>
   </nz-header>
