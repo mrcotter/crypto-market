@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { NZ_LOCALE, enUS } from 'ng-zorro-antd';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { DataService } from './data.service'; 
 
@@ -27,7 +26,6 @@ import { AdsComponent } from './ads/ads.component';
   ],
   imports: [
     BrowserModule,
-    Ng2SearchPipeModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,

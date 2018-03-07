@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Pipe } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
@@ -73,6 +73,7 @@ export class DataService {
     'Gas': 'GAS'
   };
   private defaultDataCopy: any = { ...this.symbolnameData };
+  private filterData: any;
 
   private priceMultiurl: string;
   private imageurlPrefix: string = "./assets/crypto-icons/";
@@ -84,6 +85,69 @@ export class DataService {
 
   constructor(private _http: HttpClient) { }
 
+  // Return filtered coin list, if search text is empty, recover from copy
+  filter(searchText: string): any {
+    if (searchText !== "") {
+
+      this.filterData = {};
+      let data: any[] = (JSON.stringify(this.symbolnameData)).replace(/{|}/g, '').split(',');
+      data = data.filter((el) => el.toLowerCase().indexOf(searchText.toLowerCase()) > -1);
+      //console.log( (data) );
+      let arr: any[] = [];
+      data.forEach(function (el) {
+        let temp = el.replace(/"/g, '').split(':');
+        arr.push(temp);
+      });
+      console.log(arr);
+
+      this.symbolnameData = arr.reduce((obj, [key, value]) => {
+        obj[key] = value;
+        return obj;
+      }, {})
+      //console.log(this.symbolnameData);
+
+    } else {
+      this.symbolnameData = this.defaultDataCopy;
+    }
+
+  }
+
+  // Sort data by coin name or coin symbol
+  sortData(sortName: string, sortOrder: string) {
+    switch (sortName) {
+
+      case "name": {
+        if (sortOrder === "ascend") {
+          this.symbolnameData = Object.keys(this.symbolnameData).sort().reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
+        } else if (sortOrder === "descend") {
+          this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => b.localeCompare(a))
+            .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
+        } else {
+          this.symbolnameData = this.defaultDataCopy;
+        }
+        //console.log(this.symbolnameData);
+        break;
+      }
+
+      case "symbol": {
+        if (sortOrder === "ascend") {
+          this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => this.symbolnameData[a].localeCompare(this.symbolnameData[b]))
+            .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
+          // console.log(this.symbolnameData);
+        } else if (sortOrder === "descend") {
+          this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => this.symbolnameData[b].localeCompare(this.symbolnameData[a]))
+            .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
+        } else {
+          this.symbolnameData = this.defaultDataCopy;
+        }
+        //console.log(this.symbolnameData);
+        break;
+      }
+
+    }
+    //console.log(this.symbolnameData);
+  }
+
   // Fetch price data every 15 seconds
   getPricesFull(): Observable<any> {
     let coinlist: string[] = Object.values(this.symbolnameData);
@@ -93,7 +157,7 @@ export class DataService {
     // interval is set to 15000(15s)
     return this.timer
       .flatMap(result => this.result = this._http.get(this.priceMultiurl)
-      .pipe(catchError(this.handleError('getPricesFull', []))));
+        .pipe(catchError(this.handleError('getPricesFull', []))));
   }
 
   // Fetch single price data
@@ -156,42 +220,6 @@ export class DataService {
     return this._http.get("https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + `${symbol}` + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate)
       .map(result => this.result = result)
       .pipe(catchError(this.handleError(`getHitoricalPrices symbol=${symbol}`)));
-  }
-
-  // Sort data by coin name or coin symbol
-  sortData(sortName: string, sortOrder: string) {
-    switch (sortName) {
-
-      case "name": {
-        if (sortOrder === "ascend") {
-          this.symbolnameData = Object.keys(this.symbolnameData).sort().reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
-        } else if (sortOrder === "descend") {
-          this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => b.localeCompare(a))
-            .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
-        } else {
-          this.symbolnameData = this.defaultDataCopy;
-        }
-        //console.log(this.symbolnameData);
-        break;
-      }
-
-      case "symbol": {
-        if (sortOrder === "ascend") {
-          this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => this.symbolnameData[a].localeCompare(this.symbolnameData[b]))
-            .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
-          // console.log(this.symbolnameData);
-        } else if (sortOrder === "descend") {
-          this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => this.symbolnameData[b].localeCompare(this.symbolnameData[a]))
-            .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
-        } else {
-          this.symbolnameData = this.defaultDataCopy;
-        }
-        //console.log(this.symbolnameData);
-        break;
-      }
-
-    }
-    //console.log(this.symbolnameData);
   }
 
   /**

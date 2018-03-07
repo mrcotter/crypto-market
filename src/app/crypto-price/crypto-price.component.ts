@@ -26,6 +26,7 @@ export class CryptoPriceComponent implements OnInit {
   private subscription: Subscription;
   private timer: Observable<any>;
 
+  private _searchText: string = "";
   private _sortValue = null;
   private _sortName = null;
   private _loading = true;
@@ -54,6 +55,11 @@ export class CryptoPriceComponent implements OnInit {
     this.refreshData();
   }
 
+  onSearch(text: string): void {
+    this._data.filter(text);
+    this.refreshData(true);
+  }
+
   ngOnInit() {
     this.refreshData();
   }
@@ -62,6 +68,8 @@ export class CryptoPriceComponent implements OnInit {
     // When page size changed, reset index to 1
     if (reset) {
       this._current = 1;
+      this._sortName = null;
+      this._sortValue = null;
     }
 
     this._loading = true;
@@ -115,7 +123,7 @@ export class CryptoPriceComponent implements OnInit {
           this.cryptos = JSON.parse(JSON.stringify(Object.values(this.cryData)));
 
         }
-        //console.log(this._current);
+        //console.log(Object.values(this.cryData));
         this._loading = false;
         this.setTimer();
       });
@@ -130,10 +138,6 @@ export class CryptoPriceComponent implements OnInit {
       // set showloader to false to hide colored div from view after 1.5 seconds
       this.showloader = false;
     });
-  }
-
-  onSearch(event: string): void {
-    console.log(event);
   }
 
   sendEvent = () => {
