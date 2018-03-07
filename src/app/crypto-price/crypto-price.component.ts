@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/timer';
 import { Crypto } from '../crypto';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-crypto-price',
@@ -39,7 +40,10 @@ export class CryptoPriceComponent implements OnInit {
     symbol : null
   };
 
-  constructor(private _data: DataService) { }
+  constructor(
+    private _data: DataService,
+    private _message: NzMessageService
+  ) { }
 
   sort(sortName: string, sortEvent: string) {
     this._sortValue = sortEvent;
@@ -56,7 +60,12 @@ export class CryptoPriceComponent implements OnInit {
   }
 
   onSearch(text: string): void {
-    this._data.filter(text);
+    let result:boolean = this._data.filter(text);
+    if (!result) {
+        // Display message when no coins are found and reset search input
+        this._message.create('warning','We couldn’t find any coins for ' + text);
+        this._searchText = "";
+    }
     this.refreshData(true);
   }
 
@@ -65,7 +74,7 @@ export class CryptoPriceComponent implements OnInit {
   }
 
   refreshData(reset:boolean = false) {
-    // When page size changed, reset index to 1
+    // When page size changed, reset pagination index to 1
     if (reset) {
       this._current = 1;
       this._sortName = null;

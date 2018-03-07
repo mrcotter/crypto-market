@@ -8,7 +8,7 @@
         </a>
       </div>
       <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="6">
-        <nz-input [nzType]="'search'" [(ngModel)]="_searchText" [nzPlaceHolder]="'Search Coins'" (nzOnSearch)="onSearch($event)"></nz-input>
+        <nz-input [nzType]="'search'" [(ngModel)]="_searchText" [nzPlaceHolder]="'Search Coins'" [nzSize]="'large'" (nzOnSearch)="onSearch($event)"></nz-input>
       </div>
     </div>
   </nz-header>

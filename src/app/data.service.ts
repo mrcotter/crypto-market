@@ -73,7 +73,6 @@ export class DataService {
     'Gas': 'GAS'
   };
   private defaultDataCopy: any = { ...this.symbolnameData };
-  private filterData: any;
 
   private priceMultiurl: string;
   private imageurlPrefix: string = "./assets/crypto-icons/";
@@ -85,29 +84,40 @@ export class DataService {
 
   constructor(private _http: HttpClient) { }
 
-  // Return filtered coin list, if search text is empty, recover from copy
-  filter(searchText: string): any {
+  // Return filtered coin list
+  filter(searchText: string): boolean {
+    // Recover default data set before filter
+    this.symbolnameData = this.defaultDataCopy;
+
+    // If search text is not empty, find fuzzy match and convert to the same object structure
     if (searchText !== "") {
 
-      this.filterData = {};
-      let data: any[] = (JSON.stringify(this.symbolnameData)).replace(/{|}/g, '').split(',');
-      data = data.filter((el) => el.toLowerCase().indexOf(searchText.toLowerCase()) > -1);
-      //console.log( (data) );
+      let data: any[] = (JSON.stringify(this.symbolnameData)).replace(/{|}/g, '').split(',')
+        .filter((el) => el.toLowerCase().indexOf(searchText.toLowerCase()) > -1);
+      //console.log(data);
+
+      if (data.length === 0) {
+        return false;
+      }
+
       let arr: any[] = [];
       data.forEach(function (el) {
         let temp = el.replace(/"/g, '').split(':');
         arr.push(temp);
       });
-      console.log(arr);
+      //console.log(arr);
 
       this.symbolnameData = arr.reduce((obj, [key, value]) => {
         obj[key] = value;
         return obj;
       }, {})
       //console.log(this.symbolnameData);
+      return true;
 
     } else {
+      // If search text is empty, recover from copy
       this.symbolnameData = this.defaultDataCopy;
+      return true;
     }
 
   }

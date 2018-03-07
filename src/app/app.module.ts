@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_MESSAGE_CONFIG } from 'ng-zorro-antd';
 import { NZ_LOCALE, enUS } from 'ng-zorro-antd';
 
 import { DataService } from './data.service'; 
@@ -32,7 +32,11 @@ import { AdsComponent } from './ads/ads.component';
     NgZorroAntdModule.forRoot({ extraFontName: 'anticon', extraFontUrl: './assets/fonts/iconfont' }),
     AppRoutingModule
   ],
-  providers: [DataService, { provide: NZ_LOCALE, useValue: enUS } ],
+  providers: [
+    DataService,
+    { provide: NZ_LOCALE, useValue: enUS },
+    { provide: NZ_MESSAGE_CONFIG, useValue: { nzDuration: 2500 } }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
