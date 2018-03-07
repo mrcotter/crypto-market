@@ -27,7 +27,6 @@ export class CryptoPriceComponent implements OnInit {
   private subscription: Subscription;
   private timer: Observable<any>;
 
-  private _searchText: string = "";
   private _sortValue = null;
   private _sortName = null;
   private _loading = true;
@@ -40,7 +39,8 @@ export class CryptoPriceComponent implements OnInit {
     symbol : null
   };
 
-  private input_id: string = "";
+  _searchText: string = "";
+  input_id: string = "";
 
   constructor(
     private _data: DataService,
