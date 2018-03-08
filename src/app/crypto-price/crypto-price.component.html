@@ -2,7 +2,7 @@
   <nz-header class="clearfix" id="header">
     <div nz-row>
       <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="12">
-        <a routerLink="" id="logo">
+        <a routerLink="" (click)="onSearch('')" id="logo">
           <span>CRYPTOCURRENCY
             <br class="full-width-breakpoint" /> MARKET</span>
         </a>
@@ -45,7 +45,9 @@
           <tbody nz-tbody>
             <tr nz-tbody-tr *ngFor="let crypto of nzTable.data" routerLink="/{{ crypto.symbol | lowercase }}" (click)='sendEvent()'>
               <td nz-td class="crypto-name flag col-1">
-                <img src="{{ crypto.image1x }}" srcset="{{ crypto.image2x }}" /> {{ crypto.name }}
+                <img [@fadeInOut]="fadeInState" class="blur" alt="placeholder" [src]="placeholder" style="width: 0;">
+                <img [@fadeInOut]="fadeOutState" alt="coinicon" src="{{ crypto.image1x }}" srcset="{{ crypto.image2x }}" (load)="isLoaded($event)"/>
+                {{ crypto.name }}
               </td>
               <td nz-td class="crypto-symbol col-2">{{ crypto.symbol }}</td>
               <td nz-td [ngClass]="{'price-up': (crypto.priceCompare > 0 && showloader), 'price-down': (crypto.PriceCompare < 0 && showloader) }"

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -9,9 +10,28 @@ import { NzMessageService } from 'ng-zorro-antd';
 @Component({
   selector: 'app-crypto-price',
   templateUrl: './crypto-price.component.html',
-  styleUrls: ['./crypto-price.component.css']
+  styleUrls: ['./crypto-price.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('in', style({opacity: 1, visibility: 'visible'})),
+      state('out', style({opacity: 0, visibility: 'hidden'})),
+      transition('in <=> out', [
+        animate('1s ease-out')
+      ])
+    ])
+  ]
 })
 export class CryptoPriceComponent implements OnInit {
+
+  public loaded = false;
+  public fadeInState = 'in';
+  public fadeOutState = 'out';
+  // State change after image is fully loaded
+  public isLoaded(event: Event) {
+    this.loaded = true;
+    this.fadeInState = 'out';
+    this.fadeOutState = 'in';
+  }
 
   cryptos: Crypto[];
   public cryData: any[];
@@ -22,6 +42,9 @@ export class CryptoPriceComponent implements OnInit {
   private cryptoImages2x: string[];
   private cryptoLastPrices: number[];
   private cryptoPriceCompare: number[];
+
+  private _placeholderBase64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDAgNzkuMTYwNDUxLCAyMDE3LzA1LzA2LTAxOjA4OjIxICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+LUNEtwAAAClJREFUSIntzTEBAAAIwzDAv+dhAr5UQNNJ6rN5vQMAAAAAAAAAAIDDFsfxAz1KKZktAAAAAElFTkSuQmCC';
+  private _placeHolderSafe: SafeUrl;
 
   private showloader: boolean = false;
   private subscription: Subscription;
@@ -44,9 +67,11 @@ export class CryptoPriceComponent implements OnInit {
 
   constructor(
     private _data: DataService,
-    private _message: NzMessageService
+    private _message: NzMessageService,
+    private _sanitizer: DomSanitizer
   ) { }
 
+  // Callback when sort is triggered
   sort(sortName: string, sortEvent: string) {
     this._sortValue = sortEvent;
     this._sortName = sortName;
@@ -61,6 +86,7 @@ export class CryptoPriceComponent implements OnInit {
     this.refreshData();
   }
 
+  // Callback when search is triggered
   onSearch(text: string): void {
     let result:boolean = this._data.filter(text);
     if (!result) {
@@ -76,11 +102,12 @@ export class CryptoPriceComponent implements OnInit {
   }
 
   refreshData(reset:boolean = false) {
-    // When page size changed, reset pagination index to 1
+    // When page size changed, reset pagination index to 1 and others to default values
     if (reset) {
       this._current = 1;
       this._sortName = null;
       this._sortValue = null;
+      this._searchText = "";
     }
 
     this._loading = true;
@@ -93,6 +120,7 @@ export class CryptoPriceComponent implements OnInit {
     this.cryptoNames = this._data.getNamesFull();
     this.cryptoImages1x = this._data.getImages1xFull();
     this.cryptoImages2x = this._data.getImages2xFull();
+    this._placeHolderSafe = this._sanitizer.bypassSecurityTrustUrl(this._placeholderBase64);
 
     this._data.getPricesFull()
       .subscribe(res => {
@@ -151,10 +179,15 @@ export class CryptoPriceComponent implements OnInit {
     });
   }
 
+  public get placeholder() {
+    return this._placeHolderSafe;
+  }
+
+  // Input element Id added when focused
   addId() {
     this.input_id = "focusWidth";
   }
-
+  // Input element Id removed when lost focus
   removeId() {
     this.input_id = "";
   }
