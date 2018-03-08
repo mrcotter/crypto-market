@@ -93,8 +93,10 @@ export class CryptoPriceComponent implements OnInit {
         // Display message when no coins are found and reset search input
         this._message.create('warning','We couldn’t find any coins for ' + text);
         this._searchText = "";
+        this.refreshData(true);
+    } else {
+      this.refreshData();
     }
-    this.refreshData(true);
   }
 
   ngOnInit() {
