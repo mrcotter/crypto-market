@@ -46,7 +46,7 @@
             <tr nz-tbody-tr *ngFor="let crypto of nzTable.data" routerLink="/{{ crypto.symbol | lowercase }}" (click)='sendEvent()'>
               <td nz-td class="crypto-name flag col-1">
                 <img [@fadeInOut]="fadeInState" class="blur" alt="placeholder" [src]="placeholder" style="width: 0;">
-                <img [@fadeInOut]="fadeOutState" alt="coinicon" src="{{ crypto.image }}" (load)="isLoaded($event)"/>
+                <img [@fadeInOut]="fadeOutState" alt="{{ crypto.symbol }}" src="{{ crypto.image }}" (load)="isLoaded($event)"/>
                 {{ crypto.name }}
               </td>
               <td nz-td class="crypto-symbol col-2">{{ crypto.symbol }}</td>
