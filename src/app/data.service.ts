@@ -11,74 +11,73 @@ export class DataService {
   private result: any;
   // Currently 60 coins in data list
   private symbolnameData: any = {
-    'Bitcoin':      'BTC',
-    'Ethereum':     'ETH',
-    'Ripple':       'XRP',
+    'Bitcoin': 'BTC',
+    'Ethereum': 'ETH',
+    'Ripple': 'XRP',
     'Bitcoin Cash': 'BCH',
-    'Litecoin':     'LTC',
-    'Cardano':      'ADA',
-    'NEO':          'NEO',
-    'Stellar':      'XLM',
-    'Monero':       'XMR',
-    'EOS':          'EOS',
-    'IOTA':         'IOT',
-    'Dash':         'DASH',
-    'NEM':          'XEM',
-    'TRON':         'TRX',
-    'Eth Classic':  'ETC',
-    'Tether':       'USDT',
-    'VeChain':      'VEN',
-    'Qtum':         'QTUM',
-    'Nano':         'XRB',
-    'Lisk':         'LSK',
+    'Litecoin': 'LTC',
+    'Cardano': 'ADA',
+    'NEO': 'NEO',
+    'Stellar': 'XLM',
+    'Monero': 'XMR',
+    'EOS': 'EOS',
+    'IOTA': 'IOT',
+    'Dash': 'DASH',
+    'NEM': 'XEM',
+    'TRON': 'TRX',
+    'Eth Classic': 'ETC',
+    'Tether': 'USDT',
+    'VeChain': 'VEN',
+    'Qtum': 'QTUM',
+    'Nano': 'XRB',
+    'Lisk': 'LSK',
     'Bitcoin Gold': 'BTG',
-    'OmiseGo':      'OMG',
-    'ICON':         'ICX',
-    'Zcash':        'ZEC',
-    'Digix DAO':    'DGD',
+    'OmiseGo': 'OMG',
+    'ICON': 'ICX',
+    'Zcash': 'ZEC',
+    'Digix DAO': 'DGD',
     'Binance Coin': 'BNB',
-    'Steem':        'STEEM',
-    'Verge':        'XVG',
-    'Stratis':      'STRAT',
-    'Populous':     'PPT',
-    'ByteCoin':     'BCN',
-    'Waves':        'WAVES',
-    'Siacoin':      'SC',
-    'Status':       'SNT',
-    'RChain':       'RHOC',
-    'Maker':        'MKR',
-    'DogeCoin':     'DOGE',
-    'Bitshares':    'BTS',
-    'Decred':       'DCR',
-    'Aeternity':    'AE',
-    'Waltonchain':  'WTC',
-    'Augur':        'REP',
-    'Electroneum':  'ETN',
-    '0x':           'ZRX',
-    'Komodo':       'KMD',
-    'Bytom':        'BTM',
-    'ARK':          'ARK',
-    'Veritaseum':   'VERI',
-    'Ardor':        'ARDR',
-    'Golem':        'GNT',
-    'Dragonchain':  'DRGN',
-    'Hshare':       'HSR',
-    'BAT':          'BAT',
-    'Cryptonex':    'CNX',
-    'SysCoin':      'SYS',
-    'Zilliqa':      'ZIL',
-    'KuCoin':       'KCS',
-    'DigiByte':     'DGB',
-    'Ethos':        'BQX',
-    'Gas':          'GAS'
+    'Steem': 'STEEM',
+    'Verge': 'XVG',
+    'Stratis': 'STRAT',
+    'Populous': 'PPT',
+    'ByteCoin': 'BCN',
+    'Waves': 'WAVES',
+    'Siacoin': 'SC',
+    'Status': 'SNT',
+    'RChain': 'RHOC',
+    'Maker': 'MKR',
+    'DogeCoin': 'DOGE',
+    'Bitshares': 'BTS',
+    'Decred': 'DCR',
+    'Aeternity': 'AE',
+    'Waltonchain': 'WTC',
+    'Augur': 'REP',
+    'Electroneum': 'ETN',
+    '0x': 'ZRX',
+    'Komodo': 'KMD',
+    'Bytom': 'BTM',
+    'ARK': 'ARK',
+    'Veritaseum': 'VERI',
+    'Ardor': 'ARDR',
+    'Golem': 'GNT',
+    'Dragonchain': 'DRGN',
+    'Hshare': 'HSR',
+    'BAT': 'BAT',
+    'Cryptonex': 'CNX',
+    'SysCoin': 'SYS',
+    'Zilliqa': 'ZIL',
+    'KuCoin': 'KCS',
+    'DigiByte': 'DGB',
+    'Ethos': 'BQX',
+    'Gas': 'GAS'
   };
   private defaultDataCopy: any = { ...this.symbolnameData };
 
   private priceMultiurl: string;
   private imageurlPrefix: string = "./assets/crypto-icons/";
   private imageurlSuffix: string[];
-  private images1x: any[];
-  private images2x: any[];
+  private images: any[];
 
   private timer = Observable.timer(0, 15000);
 
@@ -123,7 +122,7 @@ export class DataService {
   }
 
   // Sort data by coin name or coin symbol
-  sortData(sortName: string, sortOrder: string) {
+  sortData(sortName: string, sortOrder: string, sortFilter: boolean) {
     switch (sortName) {
 
       case "name": {
@@ -133,7 +132,9 @@ export class DataService {
           this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => b.localeCompare(a))
             .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
         } else {
-          this.symbolnameData = this.defaultDataCopy;
+          if (!sortFilter) {
+            this.symbolnameData = this.defaultDataCopy;
+          }
         }
         //console.log(this.symbolnameData);
         break;
@@ -148,7 +149,9 @@ export class DataService {
           this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => this.symbolnameData[b].localeCompare(this.symbolnameData[a]))
             .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
         } else {
-          this.symbolnameData = this.defaultDataCopy;
+          if (!sortFilter) {
+            this.symbolnameData = this.defaultDataCopy;
+          }
         }
         //console.log(this.symbolnameData);
         break;
@@ -188,40 +191,22 @@ export class DataService {
     return Object.keys(this.symbolnameData).find(key => this.symbolnameData[key] === symbol);
   }
 
-  // Get all @1x img path
-  getImages1xFull(): any[] {
+  // Get all img path
+  getImagesFull(): any[] {
     let coinlist: string[] = Object.values(this.symbolnameData);
-    this.images1x = [];
+    this.images = [];
 
     this.imageurlSuffix = coinlist.map(res => res.toLowerCase());
     for (let symbol of this.imageurlSuffix) {
-      this.images1x.push(this.imageurlPrefix + symbol + ".png");
+      this.images.push(this.imageurlPrefix + symbol + ".svg");
     }
 
-    return this.images1x;
+    return this.images;
   }
 
-  // Get single @1x img path
-  getImage1xSingle(symbol: string): string {
-    return this.imageurlPrefix + symbol.toLowerCase() + ".png"
-  }
-
-  // Get all @2x img paths
-  getImages2xFull(): any[] {
-    let coinlist: string[] = Object.values(this.symbolnameData);
-    this.images2x = [];
-
-    this.imageurlSuffix = coinlist.map(res => res.toLowerCase());
-    for (let symbol of this.imageurlSuffix) {
-      this.images2x.push(this.imageurlPrefix + symbol + "@2x.png");
-    }
-
-    return this.images2x;
-  }
-
-  // Get single @2x img path
-  getImage2xSingle(symbol: string): string {
-    return this.imageurlPrefix + symbol.toLowerCase() + "@2x.png"
+  // Get single img path
+  getImageSingle(symbol: string): string {
+    return this.imageurlPrefix + symbol.toLowerCase() + ".svg"
   }
 
   // Fetch minute/hourly/daily price of historical data

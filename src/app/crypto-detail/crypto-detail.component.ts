@@ -15,8 +15,7 @@ export class CryptoDetailComponent implements OnInit {
   cryptox: CryptoX;
   private cryptoName: string;
   private cryptoPrice: number;
-  private cryptoImage1x: string;
-  private cryptoImage2x: string;
+  private cryptoImage: string;
 
   private symbol: string;
 
@@ -66,8 +65,7 @@ export class CryptoDetailComponent implements OnInit {
     } else {
       this.cryptoName = this._data.getNameSingle(this.symbol);
 
-      this.cryptoImage1x = this._data.getImage1xSingle(this.symbol);
-      this.cryptoImage2x = this._data.getImage2xSingle(this.symbol);
+      this.cryptoImage = this._data.getImageSingle(this.symbol);
 
       this._data.getPriceSingle(this.symbol)
         .subscribe(res => {
@@ -75,8 +73,7 @@ export class CryptoDetailComponent implements OnInit {
           this.cryptoPrice = res.USD;
 
           this.cryptox = {
-            image1x: this.cryptoImage1x,
-            image2x: this.cryptoImage2x,
+            image: this.cryptoImage,
             name: this.cryptoName,
             symbol: this.symbol,
             price: this.cryptoPrice

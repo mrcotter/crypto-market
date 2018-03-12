@@ -1,6 +1,5 @@
 export class Crypto {
-  image1x: string;
-  image2x: string;
+  image: string;
   name: string;
   symbol: string;
   price: string;
@@ -11,8 +10,7 @@ export class Crypto {
 }
 
 export class CryptoX {
-  image1x: string;
-  image2x: string;
+  image: string;
   name: string;
   symbol: string;
   price: number;

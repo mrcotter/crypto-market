@@ -38,8 +38,7 @@ export class CryptoPriceComponent implements OnInit {
 
   private receiveData: any;
   private cryptoNames: string[];
-  private cryptoImages1x: string[];
-  private cryptoImages2x: string[];
+  private cryptoImages: string[];
   private cryptoLastPrices: number[];
   private cryptoPriceCompare: number[];
 
@@ -64,6 +63,7 @@ export class CryptoPriceComponent implements OnInit {
 
   _searchText: string = "";
   input_id: string = "";
+  private _searchResult: boolean = false;
 
   constructor(
     private _data: DataService,
@@ -88,8 +88,9 @@ export class CryptoPriceComponent implements OnInit {
 
   // Callback when search is triggered
   onSearch(text: string): void {
-    let result:boolean = this._data.filter(text);
-    if (!result) {
+    this._searchResult = this._data.filter(text);
+    //console.log(this._searchResult);
+    if (!this._searchResult) {
         // Display message when no coins are found and reset search input
         this._message.create('warning','We couldn’t find any coins for ' + text);
         this._searchText = "";
@@ -114,14 +115,13 @@ export class CryptoPriceComponent implements OnInit {
 
     this._loading = true;
     // Sort dataset before get
-    this._data.sortData(this._sortName, this._sortValue);
+    this._data.sortData(this._sortName, this._sortValue, this._searchResult);
 
     this.cryData = [];
     this.cryptoLastPrices = [];
     this.cryptoPriceCompare = [];
     this.cryptoNames = this._data.getNamesFull();
-    this.cryptoImages1x = this._data.getImages1xFull();
-    this.cryptoImages2x = this._data.getImages2xFull();
+    this.cryptoImages = this._data.getImagesFull();
     this._placeHolderSafe = this._sanitizer.bypassSecurityTrustUrl(this._placeholderBase64);
 
     this._data.getPricesFull()
@@ -149,8 +149,7 @@ export class CryptoPriceComponent implements OnInit {
 
         for (let _i = 0; _i < coinKeys.length; _i++) {
           this.cryData[coinKeys[_i]] = {
-            image1x: this.cryptoImages1x[_i],
-            image2x: this.cryptoImages2x[_i],
+            image: this.cryptoImages[_i],
             name: this.cryptoNames[_i],
             symbol: coinKeys[_i],
             price: coinValues[_i].USD.PRICE,
