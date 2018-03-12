@@ -123,6 +123,7 @@ export class DataService {
 
   // Sort data by coin name or coin symbol
   sortData(sortName: string, sortOrder: string, sortFilter: boolean) {
+    //console.log(sortName, sortOrder, sortFilter);
     switch (sortName) {
 
       case "name": {
@@ -154,6 +155,13 @@ export class DataService {
           }
         }
         //console.log(this.symbolnameData);
+        break;
+      }
+
+      default: {
+        if (!sortFilter) {
+          this.symbolnameData = this.defaultDataCopy;
+        }
         break;
       }
 

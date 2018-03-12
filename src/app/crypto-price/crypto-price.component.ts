@@ -100,6 +100,16 @@ export class CryptoPriceComponent implements OnInit {
     }
   }
 
+  resetAll(): void {
+    this._sortMap.name = null;
+    this._sortMap.symbol = null;
+    this.input_id = "";
+    this._index = 1;
+    this._pageSize = 20;
+    this._searchResult = false;
+    this.refreshData(true);
+  }
+
   ngOnInit() {
     this.refreshData();
   }
