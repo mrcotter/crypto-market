@@ -59,7 +59,7 @@ export class CryptoDetailComponent implements OnInit {
   ngOnInit() {
     
     this.symbol = this._route.snapshot.paramMap.get('symbol').toUpperCase();
-    //console.log( this.symbol );
+
     // Check if input symbol is valid or not
     if (this._data.getNameSingle(this.symbol) == null) {
       this._router.navigate(['/404']);
@@ -107,7 +107,7 @@ export class CryptoDetailComponent implements OnInit {
             topY = this.chart.scales['y-axis-0'].top,
             bottomY = this.chart.scales['y-axis-0'].bottom;
 
-          // draw line
+          // Draw veritical line
           ctx.save();
           ctx.beginPath();
           ctx.moveTo(x, topY);
@@ -149,7 +149,7 @@ export class CryptoDetailComponent implements OnInit {
 
     this._data.getHitoricalPrices(this.symbol, prefix, timelimit, aggregate)
       .subscribe(res => {
-        // console.log(res.Data);
+        //console.log(res.Data);
         //console.log(res.Data.length());
         priceChart = res['Data'].map(res => res.close);
         alldates = res['Data'].map(res => res.time);
@@ -182,6 +182,7 @@ export class CryptoDetailComponent implements OnInit {
 
   }
 
+  // Back to last location and send Google Analytics click events
   goBack(): void {
     (<any>window).ga('send', 'event', {
       eventCategory: 'Links and Buttons',
@@ -192,6 +193,7 @@ export class CryptoDetailComponent implements OnInit {
     this._location.back();
   }
 
+  // Change params when tabs clicked
   selectChange() {
     switch (this.selectedIndex) {
       case 0: {
@@ -225,6 +227,7 @@ export class CryptoDetailComponent implements OnInit {
     }
   }
 
+  // Define chart options
   private chartOptions: any = {
     responsive: true,
     maintainAspectRatio: false,

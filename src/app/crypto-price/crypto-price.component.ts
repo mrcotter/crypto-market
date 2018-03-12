@@ -194,6 +194,7 @@ export class CryptoPriceComponent implements OnInit {
     this.input_id = "";
   }
 
+  // Google Analytics click events
   sendEvent = () => {
     (<any>window).ga('send', 'event', {
       eventCategory: 'Links and Buttons',
