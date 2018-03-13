@@ -51,11 +51,11 @@ export class CryptoPriceComponent implements OnInit {
 
   private _sortValue = null;
   private _sortName = null;
-  private _loading = true;
-  private _current = 1;
-  private _index = 1;
+  private _loading: boolean = true;
+  private _current: number = 1;
+  private _index: number = 1;
   private _changeIndex = false;
-  private _pageSize = 20;
+  private _pageSize: number = 20;
   private _sortMap = {
     name   : null,
     symbol : null
@@ -83,30 +83,38 @@ export class CryptoPriceComponent implements OnInit {
         this._sortMap[key] = sortEvent;
       }
     });
+    this._data.reseverState(this._current, this._pageSize, this._sortMap.name, this._sortMap.symbol);
     this.refreshData();
   }
 
   // Callback when search is triggered
-  onSearch(text: string): void {
-    this._searchResult = this._data.filter(text);
+  onSearch(inputText: string): void {
+    this._searchResult = this._data.filter(inputText);
     //console.log(this._searchResult);
     if (!this._searchResult) {
         // Display message when no coins are found and reset search input
-        this._message.create('warning','We couldn’t find any coins for ' + text);
+        this._message.create('warning','We couldn’t find any coins for ' + inputText);
         this._searchText = "";
-        this.refreshData(true);
-    } else {
-      this.refreshData();
     }
+    this._data.reseverState(this._current, this._pageSize, this._sortMap.name, this._sortMap.symbol);
+    this.refreshData(true);
   }
 
   resetAll(): void {
-    this._sortMap.name = null;
-    this._sortMap.symbol = null;
+    this._sortName = null;
+    this._sortValue = null;
     this.input_id = "";
     this._index = 1;
     this._pageSize = 20;
     this._searchResult = false;
+    this._searchText = "";
+
+    this._data._previousPageSize = 20;
+    this._data._previousSortMapName = null;
+    this._data._previousSortMapSymbol = null;
+    this._data._previousData = null;
+
+    this._data.sortData(this._sortName, this._sortValue);
     this.refreshData(true);
   }
 
@@ -115,17 +123,26 @@ export class CryptoPriceComponent implements OnInit {
   }
 
   refreshData(reset:boolean = false) {
-    // When page size changed, reset pagination index to 1 and others to default values
+    // Reset table index to 1
     if (reset) {
-      this._current = 1;
-      this._sortName = null;
-      this._sortValue = null;
-      this._searchText = "";
+      this._data._previousIndex = 1;
+    }
+
+    // Set table page index and size to previous resevered data
+    if (this._data._previousIndex !== null && this._data._previousPageSize !== null) {
+      this._current = this._data._previousIndex;
+      this._pageSize = this._data._previousPageSize;
+      this._sortMap.name = this._data._previousSortMapName;
+      this._sortMap.symbol = this._data._previousSortMapSymbol;
+      //console.log("reserve data called");
     }
 
     this._loading = true;
     // Sort dataset before get
-    this._data.sortData(this._sortName, this._sortValue, this._searchResult);
+    if (this._sortName !== null || this._sortValue !== null) {
+      this._data.sortData(this._sortName, this._sortValue);
+      //console.log("sort method called");
+    }
 
     this.cryData = [];
     this.cryptoLastPrices = [];
@@ -204,13 +221,15 @@ export class CryptoPriceComponent implements OnInit {
   }
 
   // Google Analytics click events
-  sendEvent = () => {
+  sendEvent(): void {
     (<any>window).ga('send', 'event', {
       eventCategory: 'Links and Buttons',
       eventLabel: 'CoinlistToDetail',
       eventAction: 'click',
       eventValue: 20
     });
+
+    this._data.reseverState(this._current, this._pageSize, this._sortMap.name, this._sortMap.symbol);
   }
 
 }

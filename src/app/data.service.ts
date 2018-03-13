@@ -81,6 +81,14 @@ export class DataService {
 
   private timer = Observable.timer(0, 15000);
 
+  public _previousIndex: number = null;
+  public _previousData: any = null;
+  public _previousPageSize: number = null;
+  public _previousSortMapName: string = null;
+  public _previousSortMapSymbol: string = null;
+  private _filterd: boolean = false;
+
+
   constructor(private _http: HttpClient) { }
 
   // Return filtered coin list
@@ -96,6 +104,7 @@ export class DataService {
       //console.log(data);
 
       if (data.length === 0) {
+        this._filterd = false;
         return false;
       }
 
@@ -111,10 +120,12 @@ export class DataService {
         return obj;
       }, {})
       //console.log(this.symbolnameData);
+      this._filterd = true;
       return true;
 
     } else {
       // If search text is empty, recover from copy
+      this._filterd = false;
       this.symbolnameData = this.defaultDataCopy;
       return true;
     }
@@ -122,7 +133,7 @@ export class DataService {
   }
 
   // Sort data by coin name or coin symbol
-  sortData(sortName: string, sortOrder: string, sortFilter: boolean) {
+  sortData(sortName: string, sortOrder: string) {
     //console.log(sortName, sortOrder, sortFilter);
     switch (sortName) {
 
@@ -133,8 +144,12 @@ export class DataService {
           this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => b.localeCompare(a))
             .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
         } else {
-          if (!sortFilter) {
+          if (!this._filterd) {
             this.symbolnameData = this.defaultDataCopy;
+            //console.log("Use copy data");
+          } else {
+            this.symbolnameData = this._previousData;
+            //console.log("Use previous data");
           }
         }
         //console.log(this.symbolnameData);
@@ -150,8 +165,11 @@ export class DataService {
           this.symbolnameData = Object.keys(this.symbolnameData).sort((a, b) => this.symbolnameData[b].localeCompare(this.symbolnameData[a]))
             .reduce((r, k) => (r[k] = this.symbolnameData[k], r), {});
         } else {
-          if (!sortFilter) {
+          if (!this._filterd) {
             this.symbolnameData = this.defaultDataCopy;
+          } else {
+            this.symbolnameData = this._previousData;
+            //console.log("Use previous data");
           }
         }
         //console.log(this.symbolnameData);
@@ -159,14 +177,21 @@ export class DataService {
       }
 
       default: {
-        if (!sortFilter) {
-          this.symbolnameData = this.defaultDataCopy;
-        }
-        break;
+        //console.log("sort default called");
+        this.symbolnameData = this.defaultDataCopy;
       }
 
     }
     //console.log(this.symbolnameData);
+  }
+
+  // Keep previous table state data
+  reseverState(currentIndex: number, pageSize: number, sortMapName: string, sortMapSymbol: string): void {
+    this._previousIndex = currentIndex;
+    this._previousPageSize = pageSize;
+    this._previousSortMapName = sortMapName;
+    this._previousSortMapSymbol = sortMapSymbol;
+    this._previousData = { ...this.symbolnameData };
   }
 
   // Fetch price data every 15 seconds
