@@ -1,4 +1,5 @@
 import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
+import { DecimalPipe  } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
@@ -162,9 +163,9 @@ export class CryptoPriceComponent implements OnInit {
         // Price compare first time check
         if (this.cryptoLastPrices.length === 0) {
           for (let _i = 0; _i < coinKeys.length; _i++) {
-            this.cryptoLastPrices[_i] = parseFloat((coinValues[_i].USD.PRICE).substring(2).replace(/,/g, ''));
-            this.cryptoPriceCompare[_i] = (parseFloat((coinValues[_i].USD.PRICE).substring(2).replace(/,/g, '')) -
-              this.cryptoLastPrices[_i]);
+            let _currentPrice = parseFloat((coinValues[_i].USD.PRICE).substring(2).replace(/,/g, ''));
+            this.cryptoLastPrices[_i] = _currentPrice;
+            this.cryptoPriceCompare[_i] = _currentPrice - this.cryptoLastPrices[_i];
           }
         } else {
           for (let _i = 0; _i < coinKeys.length; _i++) {
@@ -181,14 +182,12 @@ export class CryptoPriceComponent implements OnInit {
             symbol: coinKeys[_i],
             price: coinValues[_i].USD.PRICE,
             marketCap: coinValues[_i].USD.MKTCAP,
-            change24: coinValues[_i].USD.CHANGE24HOUR,
             change24Num: parseFloat((coinValues[_i].USD.CHANGE24HOUR).substring(2).replace(/,/g, '')),
             priceCompare: this.cryptoPriceCompare[_i]
           }
 
           this.cryptoLastPrices[_i] = parseFloat((coinValues[_i].USD.PRICE).substring(2).replace(/,/g, ''));
           this.cryptos = JSON.parse(JSON.stringify(Object.values(this.cryData)));
-
         }
         //console.log(Object.values(this.cryData));
         this._loading = false;
@@ -211,16 +210,16 @@ export class CryptoPriceComponent implements OnInit {
     return this._placeHolderSafe;
   }
 
-  // Input element Id added when focused
+  // Input element id added when focused
   addId() {
     this.input_id = "focusWidth";
   }
-  // Input element Id removed when lost focus
+  // Input element id removed when lost focus
   removeId() {
     this.input_id = "";
   }
 
-  // Google Analytics click events
+  // Google Analytics click events and save table state
   sendEvent(): void {
     (<any>window).ga('send', 'event', {
       eventCategory: 'Links and Buttons',

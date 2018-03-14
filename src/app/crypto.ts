@@ -4,7 +4,6 @@ export class Crypto {
   symbol: string;
   price: string;
   marketCap: string;
-  change24: string;
   change24Num: number;
   priceCompare: number;
 }

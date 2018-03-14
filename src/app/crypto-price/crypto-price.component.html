@@ -53,7 +53,7 @@
               <td nz-td [ngClass]="{'price-up': (crypto.priceCompare > 0 && showloader), 'price-down': (crypto.PriceCompare < 0 && showloader) }"
                 class="crypto-price col-3">{{ crypto.price }}</td>
               <td nz-td class="crypto-market-cap col-4">{{ crypto.marketCap }}</td>
-              <td nz-td [ngClass]="(crypto.change24Num > 0) ? 'change24-green' : 'change24-red'" class="crypto-change24 col-5">{{ crypto.change24 }}</td>
+              <td nz-td [ngClass]="(crypto.change24Num > 0) ? 'change24-green' : 'change24-red'" class="crypto-change24 col-5">$ {{ crypto.change24Num | number:'1.1-5' }}</td>
             </tr>
           </tbody>
         </nz-table>
