@@ -198,7 +198,7 @@ export class DataService {
   getPricesFull(): Observable<any> {
     let coinlist: string[] = Object.values(this.symbolnameData);
     //console.log(orderedData);
-    this.priceMultiurl = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + coinlist.join() + "&tsyms=USD";
+    this.priceMultiurl = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + coinlist.join() + "&tsyms=USD&extraParams=Cryptocurrency_Market";
 
     // interval is set to 15000(15s)
     return this.timer
@@ -208,7 +208,7 @@ export class DataService {
 
   // Fetch single price data
   getPriceSingle(symbol: string): Observable<any> {
-    return this._http.get("https://min-api.cryptocompare.com/data/price?fsym=" + symbol + "&tsyms=USD")
+    return this._http.get("https://min-api.cryptocompare.com/data/price?fsym=" + symbol + "&tsyms=USD&extraParams=Cryptocurrency_Market")
       .map(result => this.result = result)
       .pipe(catchError(this.handleError('getPriceSingle', [])));
   }
@@ -245,7 +245,7 @@ export class DataService {
   // Fetch minute/hourly/daily price of historical data
   getHitoricalPrices(symbol: string, prefix: string, timelimit: number, aggregate: number): Observable<any> {
     //console.log(this._http.get("https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + `${symbol}` + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate));
-    return this._http.get("https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + `${symbol}` + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate)
+    return this._http.get("https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + `${symbol}` + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate + "&extraParams=Cryptocurrency_Market")
       .map(result => this.result = result)
       .pipe(catchError(this.handleError(`getHitoricalPrices symbol=${symbol}`)));
   }

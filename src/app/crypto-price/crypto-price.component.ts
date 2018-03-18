@@ -1,11 +1,11 @@
 import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
-import { DecimalPipe  } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/timer';
 import { Crypto } from '../crypto';
+import { DataService } from '../data.service';
 import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
