@@ -57,7 +57,9 @@ export class CryptoDetailComponent implements OnInit {
 
   ngOnInit() {
     
-    this.symbol = this._route.snapshot.paramMap.get('symbol').toUpperCase();
+    if (this._route.snapshot.paramMap.get('symbol') !== null ) {
+      this.symbol = this._route.snapshot.paramMap.get('symbol').toUpperCase();
+    }
 
     // Check if input symbol is valid or not
     if (this._data.getNameSingle(this.symbol) == null) {

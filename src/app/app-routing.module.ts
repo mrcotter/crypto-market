@@ -4,7 +4,7 @@ import { CryptoPriceComponent } from './crypto-price/crypto-price.component';
 import { CryptoDetailComponent } from './crypto-detail/crypto-detail.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '404', component: NotfoundComponent },
   { path: '', component: CryptoPriceComponent },
   { path: ':symbol', component: CryptoDetailComponent },
