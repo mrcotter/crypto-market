@@ -16,7 +16,8 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 describe('CryptoDetailComponent', () => {
   let component: CryptoDetailComponent;
   let fixture: ComponentFixture<CryptoDetailComponent>;
-
+  
+  // Setup
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -42,6 +43,7 @@ describe('CryptoDetailComponent', () => {
     fixture.detectChanges();
   });
 
+  // Component specs
   it('should create',
     inject([DataService], (_dataService: DataService) => {
       expect(component).toBeTruthy();

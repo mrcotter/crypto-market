@@ -5,7 +5,7 @@ import { AdsComponent } from './ads.component';
 describe('AdsComponent', () => {
   let component: AdsComponent;
   let fixture: ComponentFixture<AdsComponent>;
-
+  // Setup
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AdsComponent ]
@@ -19,6 +19,7 @@ describe('AdsComponent', () => {
     fixture.detectChanges();
   });
 
+  // Component specs
   it('should create', () => {
     expect(component).toBeTruthy();
   });

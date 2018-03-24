@@ -14,9 +14,8 @@ import { NgZorroAntdModule, NZ_MESSAGE_CONFIG } from 'ng-zorro-antd';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
-  //setup
-  beforeEach(async(() => {
-
+  // Setup
+  beforeEach(() => {
     (<any>window).ga = jasmine.createSpy('ga');
 
     TestBed.configureTestingModule({
@@ -35,15 +34,15 @@ describe('AppComponent', () => {
         DataService,
         { provide: NZ_MESSAGE_CONFIG }
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
-  }));
+  });
 
   afterEach(() => {
     (<any>window).ga = undefined;
   });
 
-  //specs
+  // Component specs
   it('should create the app', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
@@ -55,6 +54,7 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('Cryptocurrency Market');
   }));
 
+  // Routing specs
   it('can navigate to home (async)', async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     TestBed.get(Router)
@@ -80,5 +80,28 @@ describe('AppComponent', () => {
         done();
       }).catch(e => console.log(e));
   });
+  it('can navigate 404 (async)', async(() => {
+    let fixture = TestBed.createComponent(AppComponent);
+    TestBed.get(Router)
+      .navigate(['404'])
+      .then(() => {
+        expect(TestBed.get(Router).url).toEqual('/404');
+      }).catch(e => console.log(e));
+  }));
+  it('can navigate symbol to detail component (fakeAsync/tick)', fakeAsync(() => {
+    let fixture = TestBed.createComponent(AppComponent);
+    TestBed.get(Router).navigate(['btc'])
+      .then(() => {
+        expect(TestBed.get(Router).url).toEqual('/btc');
+      }).catch(e => console.log(e));
+  }));
+  it('can redirect nested false url to 404 (async)', async(() => {
+    let fixture = TestBed.createComponent(AppComponent);
+    TestBed.get(Router)
+      .navigate(['btc/sdfgg'])
+      .then(() => {
+        expect(TestBed.get(Router).url).toEqual('/404');
+      }).catch(e => console.log(e));
+  }));
 
 });

@@ -5,7 +5,7 @@ import { NotfoundComponent } from './notfound.component';
 describe('NotfoundComponent', () => {
   let component: NotfoundComponent;
   let fixture: ComponentFixture<NotfoundComponent>;
-
+  // Setup
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ NotfoundComponent ]
@@ -18,7 +18,8 @@ describe('NotfoundComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
+  
+  // Component specs
   it('should create', () => {
     expect(component).toBeTruthy();
   });
