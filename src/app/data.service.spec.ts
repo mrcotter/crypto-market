@@ -1,12 +1,12 @@
-import { TestBed, inject, fakeAsync, async } from '@angular/core/testing';
+import { TestBed, inject, fakeAsync, async, getTestBed } from '@angular/core/testing';
 
 import { DataService } from './data.service';
 import { HttpClientModule, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { Observable } from 'rxjs/Observable';
 
 describe('DataService', () => {
   let _data: DataService;
-  let _httpClientSpy: { get: jasmine.Spy };
 
   // Setup
   beforeEach(() => {
@@ -21,20 +21,20 @@ describe('DataService', () => {
       ]
     });
 
-    _httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
-    _data = new DataService(<any> _httpClientSpy);
+    _data = getTestBed().get(DataService);
 
   });
 
-  afterEach(() => {
+  afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
     _data = null;
-  });
+    httpMock.verify();
+  }));
 
   // Service specs
   it('should be created', inject([DataService], (service: DataService) => {
     expect(service).toBeTruthy();
   }));
-  // Data service function - filter tests
+  // Data service - filter tests
   it('should return true from filter when searchText is empty', () => {
     expect(_data.filter("")).toBeTruthy();
   });
@@ -44,9 +44,9 @@ describe('DataService', () => {
   it('should return false from filter when searchText cannot match anycoinlist dataset', () => {
     expect(_data.filter("fdrqerf")).toBeFalsy();
   });
-  // Data service http tests
-  it('search should return coin full price info', fakeAsync(() => {
-    const response = {
+  // Data service - full price http tests
+  it('should return coin full price info or catch error', inject([HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+    let mockResponse = {
       "RAW": {
         "BTC": {
           "USD": {
@@ -119,9 +119,28 @@ describe('DataService', () => {
 
     let coins: any = { 'Bitcoin': 'BTC' };
     _data.setCoinData(coins);
-
+    _data.getPricesFull().subscribe(
+      res => {
+        expect(res).toEqual(mockResponse);
+      }
+    );
 
   }));
+  it('should throw with an error message when full price API returns an error', inject([HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+    _data.getPricesFull().catch(actualError => {
+      expect(Observable.of(actualError)).toBeTruthy();
+      expect(actualError).toBeTruthy();
+      return Observable.of(actualError);
+    }).subscribe();
+  }));
+  // Data service - single price http tests
+  it('should expect a GET for request coin url', async(inject([HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+    _data.getPriceSingle("BTC").subscribe();
+    httpMock.expectOne({
+      url: 'https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD&extraParams=Cryptocurrency_Market',
+      method: 'GET'
+    });
+  })));
 
 
 });
