@@ -266,4 +266,11 @@ export class DataService {
       return of(result as T);
     };
   }
+
+  /**
+   * Below are functions used only in testing
+   */
+  setCoinData(coins: any) {
+    this.symbolnameData = coins;
+  }
 }
