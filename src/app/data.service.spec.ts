@@ -46,7 +46,7 @@ describe('DataService', () => {
   });
   // Data service - full price http tests
   it('should return coin full price info or catch error', inject([HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
-    let mockResponse = {
+    let mockResponse: any = {
       "RAW": {
         "BTC": {
           "USD": {
@@ -141,6 +141,74 @@ describe('DataService', () => {
       method: 'GET'
     });
   })));
+  // Data service - Full coin names tests
+  it('should return array of names when getNamesFull() called', () => {
+    let mockResult = ['Bitcoin', 'Ethereum', 'Ripple'];
+    
+    let coins: any = {
+      'Bitcoin': 'BTC',
+      'Ethereum': 'ETH',
+      'Ripple': 'XRP',
+    };
+    _data.setCoinData(coins);
+    expect(_data.getNamesFull()).toEqual(mockResult);
+  });
+  // Data service - single coin name tests
+  it('should return single name when getNameSingle(symbol) called', () => {
+    expect(_data.getNameSingle("BTC")).toEqual("Bitcoin");
+  });
+  // Data service - images tests
+  it('should return array of image urls and single image url', () => {
+    let imageurlPrefix = "./assets/crypto-icons/";
+    let mockResult = [ 
+      imageurlPrefix + "btc.svg", imageurlPrefix + "eth.svg", imageurlPrefix + "xrp.svg"
+    ];
 
+    let coins: any = {
+      'Bitcoin': 'BTC',
+      'Ethereum': 'ETH',
+      'Ripple': 'XRP',
+    };
+    _data.setCoinData(coins);
+    expect(_data.getImagesFull()).toEqual(mockResult);
+    expect(_data.getImageSingle("BTC")).toEqual(imageurlPrefix + "btc.svg");
+  });
+  // Data service - historical data http tests
+  it('should expect a GET for request minute historical data', async(inject([HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+    let symbol = "BTC";
+    let prefix = "histominute";
+    let timelimit = 1440;
+    let aggregate = 3;
+    
+    _data.getHitoricalPrices(symbol, prefix, timelimit, aggregate).subscribe();
+    httpMock.expectOne({
+      url: "https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + symbol + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate + "&extraParams=Cryptocurrency_Market",
+      method: 'GET'
+    });
+  })));
+  it('should expect a GET for request hourly historical data', async(inject([HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+    let symbol = "BTC";
+    let prefix = "histohour";
+    let timelimit = 168;
+    let aggregate = 1;
+    
+    _data.getHitoricalPrices(symbol, prefix, timelimit, aggregate).subscribe();
+    httpMock.expectOne({
+      url: "https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + symbol + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate + "&extraParams=Cryptocurrency_Market",
+      method: 'GET'
+    });
+  })));
+  it('should expect a GET for request daily historical data', async(inject([HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+    let symbol = "BTC";
+    let prefix = "histoday";
+    let timelimit = 365;
+    let aggregate = 2;
+    
+    _data.getHitoricalPrices(symbol, prefix, timelimit, aggregate).subscribe();
+    httpMock.expectOne({
+      url: "https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + symbol + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate + "&extraParams=Cryptocurrency_Market",
+      method: 'GET'
+    });
+  })));
 
 });
