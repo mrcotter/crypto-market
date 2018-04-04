@@ -7,10 +7,6 @@ branches:
     only:
         - master
 
-cache:
-    directories:
-        - node_modules
-
 addons:
     ssh_known_hosts: ${host_ip}:22
     chrome: stable

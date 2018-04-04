@@ -15,8 +15,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 describe('CryptoDetailComponent', () => {
   let component: CryptoDetailComponent;
   let fixture: ComponentFixture<CryptoDetailComponent>;
-  let _data: DataService;
-  let spy: any;
 
   // Setup
   beforeEach(async(() => {
@@ -37,7 +35,6 @@ describe('CryptoDetailComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
-    _data = TestBed.get(DataService);
   }));
 
   beforeEach(() => {
@@ -47,7 +44,6 @@ describe('CryptoDetailComponent', () => {
   });
 
   afterEach(() => {
-    _data = null;
     component = null;
   });
 
