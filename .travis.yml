@@ -1,6 +1,8 @@
 language: node_js
 node_js: stable
 
+sudo: required
+
 branches:
     only:
         - master
@@ -10,7 +12,8 @@ cache:
         - node_modules
 
 addons:
-    ssh_known_hosts: ${host_ip}:22,
+    ssh_known_hosts: ${host_ip}:22
+    chrome: stable
 
 before_install:
     - export TZ=Australia/Sydney
