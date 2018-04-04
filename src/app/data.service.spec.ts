@@ -154,7 +154,7 @@ describe('DataService', () => {
     expect(_data.getNamesFull()).toEqual(mockResult);
   });
   // Data service - single coin name tests
-  xit('should return single name when getNameSingle(symbol) called', () => {
+  it('should return single name when getNameSingle(symbol) called', () => {
     expect(_data.getNameSingle("BTC")).toEqual("Bitcoin");
   });
   // Data service - images tests
@@ -174,7 +174,7 @@ describe('DataService', () => {
     expect(_data.getImageSingle("BTC")).toEqual(imageurlPrefix + "btc.svg");
   });
   // Data service - historical data http tests
-  xit('should expect a GET for request minute historical data', async(inject([HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+  it('should expect a GET for request minute historical data', async(inject([HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
     let symbol = "BTC";
     let prefix = "histominute";
     let timelimit = 1440;

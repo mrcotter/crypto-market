@@ -26,7 +26,6 @@ install:
   - npm install
 
 script:
-  - ng test
   - ng build --prod --build-optimizer
 
 after_success:
