@@ -28,14 +28,14 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: false,
+    autoWatch: true,
     browsers: ['ChromeHeadless'],
     customLaunchers: {
       "Chrome-headless": {
         base: 'Chrome',
-        flags: ['--headless', '--no-sandbox']
+        flags: ['--headless', '--disable-gpu', '--no-sandbox']
       }
     },
-    singleRun: true
+    singleRun: false
   });
 };
