@@ -309,4 +309,12 @@ export class CryptoDetailComponent implements OnInit {
     }
   };
 
+  // For testing only
+  getSymbol(): string {
+    return this.symbol;
+  }
+  setSymbol(symbolName: string): void {
+    this.symbol = symbolName;
+  }
+
 }

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject, fakeAsync } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -83,7 +83,7 @@ describe('CryptoPriceComponent', () => {
     expect(_message.create).toHaveBeenCalled(); 
   });
   // SetTimer funtion tests
-  it('should be called after getFullPrice observable value returned', () => {
+  it('should be called after getFullPrice observable value returned', async(() => {
     let coins: any = {
       'Bitcoin': 'BTC',
       'Ethereum': 'ETH',
@@ -97,5 +97,5 @@ describe('CryptoPriceComponent', () => {
         expect(component.setTimer).toHaveBeenCalled;
       }
     );
-  });
+  }));
 });
