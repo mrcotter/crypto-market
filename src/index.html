@@ -8,12 +8,22 @@
 
   <meta name="description" content="A simple web app of real-time cryptocurrency price tracker based on Angular 5. Mobile-friendly and fast. Find your top favourite coins here, like Bitcoin, Ethereum, Ripple and more.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#108ee9">
+  <link rel="manifest" href="manifest.json">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
-  <app-root></app-root>
+  <app-root>
+    <nz-spin></nz-spin>
+  </app-root>
+  <!-- No Script -->
+  <noscript>
+    <h3 style="color: #ff6060; font-family: Helvetica, Arial, sans-serif; margin: 2rem;">
+      Sorry, JavaScript must be enabled to use this app
+    </h3>
+  </noscript>
   <!-- Web Fonts -->
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
   <script>

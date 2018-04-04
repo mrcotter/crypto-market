@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule, NZ_MESSAGE_CONFIG } from 'ng-zorro-antd';
 import { NZ_LOCALE, enUS } from 'ng-zorro-antd';
 
-import { DataService } from './data.service'; 
+import { DataService } from './data.service';
 
 import { AppComponent } from './app.component';
 import { CryptoPriceComponent } from './crypto-price/crypto-price.component';
@@ -15,6 +15,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AdsComponent } from './ads/ads.component';
 
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { AdsComponent } from './ads/ads.component';
     HttpClientModule,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot({ extraFontName: 'anticon', extraFontUrl: './assets/fonts/iconfont' }),
-    AppRoutingModule
+    AppRoutingModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     DataService,

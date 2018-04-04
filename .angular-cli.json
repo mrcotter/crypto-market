@@ -12,7 +12,8 @@
         "favicon.ico",
         "googlecbf6918179aeb542.html",
         "baidu_verify_FqbPekSJIX.html",
-        "sitemap.xml"
+        "sitemap.xml",
+        "manifest.json"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -21,6 +22,7 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
+      "serviceWorker": true,
       "styles": [
         "styles.css"
       ],
@@ -58,6 +60,7 @@
   },
   "defaults": {
     "styleExt": "css",
-    "component": {}
+    "component": {
+    }
   }
 }

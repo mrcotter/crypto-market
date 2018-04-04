@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^5.2.9",
     "@angular/platform-browser-dynamic": "^5.2.9",
     "@angular/router": "^5.2.9",
+    "@angular/service-worker": "^5.2.9",
     "chart.js": "^2.7.2",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.4.1",
