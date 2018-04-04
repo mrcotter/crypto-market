@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 
 describe('DataService', () => {
   let _data: DataService;
-
+  
   // Setup
   beforeEach(async(() => {
 
@@ -144,7 +144,7 @@ describe('DataService', () => {
   // Data service - Full coin names tests
   it('should return array of names when getNamesFull() called', () => {
     let mockResult = ['Bitcoin', 'Ethereum', 'Ripple'];
-    
+
     let coins: any = {
       'Bitcoin': 'BTC',
       'Ethereum': 'ETH',
@@ -160,7 +160,7 @@ describe('DataService', () => {
   // Data service - images tests
   it('should return array of image urls and single image url', () => {
     let imageurlPrefix = "./assets/crypto-icons/";
-    let mockResult = [ 
+    let mockResult = [
       imageurlPrefix + "btc.svg", imageurlPrefix + "eth.svg", imageurlPrefix + "xrp.svg"
     ];
 
@@ -179,7 +179,7 @@ describe('DataService', () => {
     let prefix = "histominute";
     let timelimit = 1440;
     let aggregate = 3;
-    
+
     _data.getHitoricalPrices(symbol, prefix, timelimit, aggregate).subscribe();
     httpMock.expectOne({
       url: "https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + symbol + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate + "&extraParams=Cryptocurrency_Market",
@@ -191,7 +191,7 @@ describe('DataService', () => {
     let prefix = "histohour";
     let timelimit = 168;
     let aggregate = 1;
-    
+
     _data.getHitoricalPrices(symbol, prefix, timelimit, aggregate).subscribe();
     httpMock.expectOne({
       url: "https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + symbol + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate + "&extraParams=Cryptocurrency_Market",
@@ -203,7 +203,7 @@ describe('DataService', () => {
     let prefix = "histoday";
     let timelimit = 365;
     let aggregate = 2;
-    
+
     _data.getHitoricalPrices(symbol, prefix, timelimit, aggregate).subscribe();
     httpMock.expectOne({
       url: "https://min-api.cryptocompare.com/data/" + prefix + "?fsym=" + symbol + "&tsym=USD&limit=" + timelimit + "&aggregate=" + aggregate + "&extraParams=Cryptocurrency_Market",
