@@ -174,7 +174,7 @@ describe('DataService', () => {
     expect(_data.getImageSingle("BTC")).toEqual(imageurlPrefix + "btc.svg");
   });
   // Data service - historical data http tests
-  it('should expect a GET for request minute historical data', async(inject([HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+  xit('should expect a GET for request minute historical data', async(inject([HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
     let symbol = "BTC";
     let prefix = "histominute";
     let timelimit = 1440;
