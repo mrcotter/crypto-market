@@ -15,7 +15,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
   // Setup
-  beforeEach(() => {
+  beforeEach(async(() => {
     (<any>window).ga = jasmine.createSpy('ga');
 
     TestBed.configureTestingModule({
@@ -36,7 +36,7 @@ describe('AppComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
-  });
+  }));
 
   afterEach(() => {
     (<any>window).ga = undefined;

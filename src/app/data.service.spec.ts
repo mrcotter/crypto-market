@@ -9,7 +9,7 @@ describe('DataService', () => {
   let _data: DataService;
 
   // Setup
-  beforeEach(() => {
+  beforeEach(async(() => {
 
     TestBed.configureTestingModule({
       imports: [
@@ -23,7 +23,7 @@ describe('DataService', () => {
 
     _data = getTestBed().get(DataService);
 
-  });
+  }));
 
   afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
     _data = null;
