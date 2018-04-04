@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed, inject, fakeAsync } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { NgZorroAntdModule, NZ_MESSAGE_CONFIG, NzMessageService } from 'ng-zorro-antd';

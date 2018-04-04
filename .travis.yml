@@ -2,6 +2,9 @@ language: node_js
 node_js: stable
 os: osx
 
+addons:
+    chrome: beta
+
 branches:
     only:
         - master
@@ -15,6 +18,7 @@ before_install:
     - rm pvt-key.enc
     - chmod 600 deploy_rsa
     - mv deploy_rsa ~/.ssh/id_rsa
+    - "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --headless --disable-gpu --remote-debugging-port=9876 http://localhost &
 
 install:
   - npm install
