@@ -13,7 +13,8 @@
         "googlecbf6918179aeb542.html",
         "baidu_verify_FqbPekSJIX.html",
         "sitemap.xml",
-        "manifest.json"
+        "manifest.json",
+        "browserconfig.xml"
       ],
       "index": "index.html",
       "main": "main.ts",
