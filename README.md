@@ -1,6 +1,6 @@
 # [Cryptocurrency Market](https://crypto.kris2d.info/)
 
-This is a simple web application of real-time cryptocurrency price tracker based on Angular 5. Support features of Progressive Web Apps to provide better user experience.
+This is a simple Progressive Web App using Angular 5 that tracking real-time cryptocurrency prices. Find your top favourite coins here, like Bitcoin, Ethereum, Ripple and more.
 
 ## Environment
 
@@ -18,7 +18,7 @@ This is a simple web application of real-time cryptocurrency price tracker based
 * Draw historical price trends using [Chart.js](http://www.chartjs.org/) with customised styles and functions;
 * Integrated with [Ant Design](https://ng.ant.design/) for simple and unified visual style;
 * Cross-browser compatability and mobile-friendly;
-* Progressive Web Apps compatible. Now you can add it to your Android Home Screen or into Chrome Apps.
+* Support Progressive Web Apps' features. Now you can add it to your Android Home Screen or into Chrome Apps.
 
 ![Cryptocurrency Market](https://user-images.githubusercontent.com/5259084/37133234-2f08308c-22e6-11e8-8c31-ea321f825ae6.png)
 
