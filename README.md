@@ -6,7 +6,7 @@ This is a simple Progressive Web App using Angular 5 that tracks real-time crypt
 
 [![Build Status](https://travis-ci.org/mrcotter/crypto-market.svg?branch=master)](https://travis-ci.org/mrcotter/crypto-market)
 [![Angular 5.2.9](https://img.shields.io/badge/Angular-5.2.9-brightgreen.svg)](https://angular.io/)
-[![Angular-Cli 1.7.3](https://img.shields.io/badge/AngularCLI-1.7.3-brightgreen.svg)](https://github.com/angular/angular-cli)
+[![Angular-Cli 1.7.4](https://img.shields.io/badge/AngularCLI-1.7.4-brightgreen.svg)](https://github.com/angular/angular-cli)
 [![NG-ZORRO 0.6.15](https://img.shields.io/badge/NGZORRO-0.6.15-brightgreen.svg)](https://ng.ant.design/#/docs/angular/introduce)
 [![Chart.js 2.7.2](https://img.shields.io/badge/Chart.js-2.7.2-brightgreen.svg)](http://www.chartjs.org/)
 
