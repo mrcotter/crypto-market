@@ -13,7 +13,6 @@ branches:
 
 addons:
     ssh_known_hosts: ${host_ip}:22
-    chrome: stable
 
 before_install:
     - export TZ=Australia/Sydney
