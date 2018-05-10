@@ -1,5 +1,5 @@
 language: node_js
-node_js: stable
+node_js: "9"
 
 sudo: required
 
@@ -12,6 +12,8 @@ branches:
         - master
 
 addons:
+    apt:
+      update: true
     ssh_known_hosts: ${host_ip}:22
 
 before_install:
