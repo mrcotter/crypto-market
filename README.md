@@ -26,13 +26,18 @@ This is a simple Progressive Web App using Angular 5 that tracks real-time crypt
 
 ![Cryptocurrency Market](https://user-images.githubusercontent.com/5259084/37133247-3e5bab72-22e6-11e8-8df3-ec6d9a82257b.jpg)
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+## Serving with http-server to Support Service Worker
+
+Because `ng serve` does not work with service workers, you must use a separate HTTP server to test your project locally. You can use any HTTP server. The example below uses the http-server package from npm. To reduce the possibility of conflicts, test on a dedicated port.
+
+```bash
+cd dist
+npx http-server -p 8080
+```
 
 ## Running unit tests
 
