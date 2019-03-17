@@ -1,4 +1,4 @@
-# [Cryptocurrency Market](https://crypto.kris2d.info/)
+# Cryptocurrency Market
 
 This is a simple Progressive Web App using Angular 5 that tracks real-time cryptocurrency prices. Find your top favourite coins here, like Bitcoin, Ethereum, Ripple and more. What's more, you can add this app to your iPhone and Android Home Screen now.
 
